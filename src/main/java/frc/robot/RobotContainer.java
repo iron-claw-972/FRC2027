@@ -149,7 +149,7 @@ public class RobotContainer {
         new AutoFactory(
             drive::getPose,
             drive::resetOdometry,
-            sample -> drive.setChassisSpeeds(sample.getChassisSpeeds(), false),
+            sample -> drive.setChassisVelocities(sample.getChassisVelocities(), false),
             true,
             drive,
             (trajectory, startOrFinish) -> {
@@ -172,12 +172,12 @@ public class RobotContainer {
         (pose) -> {
           drive.resetOdometry(pose);
         },
-        () -> drive.getChassisSpeeds(),
+        () -> drive.getChassisVelocities(),
         (chassisSpeeds) -> {
           if (!Constants.DISABLE_LOGGING) {
-            Logger.recordOutput("Auto/ChassisSpeeds", chassisSpeeds);
+            Logger.recordOutput("Auto/ChassisVelocities", chassisSpeeds);
           }
-          drive.setChassisSpeeds(chassisSpeeds, false); // problem??
+          drive.setChassisVelocities(chassisSpeeds, false); // problem??
         },
         AutoConstants.AUTO_CONTROLLER,
         AutoConstants.CONFIG,

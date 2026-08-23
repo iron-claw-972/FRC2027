@@ -1,7 +1,7 @@
 package frc.robot.commands.drive_comm;
 
 import org.wpilib.math.controller.PIDController;
-import org.wpilib.math.kinematics.ChassisSpeeds;
+import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.driverstation.DriverStation.Alliance;
 import org.wpilib.smartdashboard.SmartDashboard;
 import org.wpilib.command2.Command;

@@ -16,7 +16,7 @@ import org.wpilib.math.filter.Debouncer;
 import org.wpilib.math.geometry.Pose2d;
 import org.wpilib.math.geometry.Rotation2d;
 import org.wpilib.math.geometry.Translation2d;
-import org.wpilib.math.kinematics.ChassisSpeeds;
+import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.math.trajectory.TrapezoidProfile;
 import org.wpilib.math.util.Units;
 import org.wpilib.command2.Command;
@@ -102,8 +102,8 @@ public class DriveToPose extends Command {
 
     targetPose = target.get();
     Pose2d currentPose = robot.get();
-    ChassisSpeeds fieldVelocity =
-        ChassisSpeeds.fromRobotRelativeSpeeds(drive.getChassisSpeeds(), currentPose.getRotation());
+    ChassisVelocities fieldVelocity =
+        ChassisVelocities.fromRobotRelativeSpeeds(drive.getChassisVelocities(), currentPose.getRotation());
     Translation2d linearFieldVelocity =
         new Translation2d(fieldVelocity.vxMetersPerSecond, fieldVelocity.vyMetersPerSecond);
 
@@ -141,7 +141,7 @@ public class DriveToPose extends Command {
     // Calculate drive speed
     double currentDistance = currentPose.getTranslation().getDistance(targetPose.getTranslation());
     double ffScaler =
-        MathUtil.clamp((currentDistance - ffMinRadius) / (ffMaxRadius - ffMinRadius), 0.0, 1.0);
+        Math.max(0.0, Math.min(1.0,(currentDistance - ffMinRadius) / (ffMaxRadius - ffMinRadius)));
     driveErrorAbs = currentDistance;
     driveController.reset(
         lastSetpointTranslation.getDistance(targetPose.getTranslation()),

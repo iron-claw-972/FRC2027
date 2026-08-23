@@ -3,7 +3,7 @@ package frc.robot.commands.vision;
 import java.util.function.Supplier;
 
 import org.wpilib.math.util.MathUtil;
-import org.wpilib.math.kinematics.ChassisSpeeds;
+import org.wpilib.math.kinematics.ChassisVelocities;
 import frc.robot.commands.drive_comm.DefaultDriveCommand;
 import frc.robot.constants.VisionConstants;
 import frc.robot.controls.BaseDriverConfig;
@@ -29,7 +29,7 @@ public class AimAtGamePiece extends DefaultDriveCommand {
   }
 
   @Override
-  protected void drive(ChassisSpeeds speeds) {
+  protected void drive(ChassisVelocities speeds) {
     if (!VisionConstants.OBJECT_DETECTION_ENABLED) {
       super.drive(speeds);
       return;

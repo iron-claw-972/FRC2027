@@ -7,7 +7,7 @@
 
 package frc.robot.util.SwerveStuff;
 
-import org.wpilib.math.kinematics.ChassisSpeeds;
+import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.math.kinematics.SwerveModuleState;
 
-public record SwerveSetpoint(ChassisSpeeds chassisSpeeds, SwerveModuleState[] moduleStates) {}
+public record SwerveSetpoint(ChassisVelocities chassisSpeeds, SwerveModuleState[] moduleStates) {}

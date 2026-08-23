@@ -1,7 +1,7 @@
 package frc.robot.commands.drive_comm;
 
 import org.wpilib.math.geometry.Pose2d;
-import org.wpilib.math.kinematics.ChassisSpeeds;
+import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.math.kinematics.SwerveModuleState;
 import org.wpilib.math.trajectory.Trajectory;
 import org.wpilib.math.trajectory.Trajectory.State;
@@ -34,9 +34,9 @@ public class TrajectoryPresetSteerAngles extends InstantCommand {
           double angularVelo =
               (nextPose.getRotation().getRadians() - initialPose.getRotation().getRadians()) / time;
 
-          ChassisSpeeds chassisSpeeds = new ChassisSpeeds(xVelocity, yVelocity, angularVelo);
+          ChassisVelocities chassisSpeeds = new ChassisVelocities(xVelocity, yVelocity, angularVelo);
           chassisSpeeds =
-              ChassisSpeeds.fromFieldRelativeSpeeds(chassisSpeeds, initialPose.getRotation());
+              ChassisVelocities.fromFieldRelativeSpeeds(chassisSpeeds, initialPose.getRotation());
 
           SwerveModuleState[] swerveModuleStates =
               DriveConstants.KINEMATICS.toSwerveModuleStates(chassisSpeeds);

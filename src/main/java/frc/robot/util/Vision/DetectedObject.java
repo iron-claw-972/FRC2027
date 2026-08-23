@@ -6,7 +6,7 @@ import org.wpilib.math.geometry.Pose3d;
 import org.wpilib.math.geometry.Rotation3d;
 import org.wpilib.math.geometry.Transform3d;
 import org.wpilib.math.geometry.Translation3d;
-import org.wpilib.math.kinematics.ChassisSpeeds;
+import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.math.util.Units;
 import org.wpilib.driverstation.DriverStation.Alliance;
 import frc.robot.Robot;
@@ -370,7 +370,7 @@ public class DetectedObject {
    * @return The relative angle in radians
    */
   public double getVelocityRelativeAngle() {
-    ChassisSpeeds speeds = drive.getChassisSpeeds();
+    ChassisVelocities speeds = drive.getChassisVelocities();
     double angle =
         getRelativeAngle() - Math.atan2(speeds.vyMetersPerSecond, speeds.vxMetersPerSecond);
     return MathUtil.angleModulus(angle);

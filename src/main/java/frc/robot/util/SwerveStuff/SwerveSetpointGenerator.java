@@ -12,7 +12,7 @@ import static frc.robot.util.EqualsUtil.*;
 import org.wpilib.math.geometry.Rotation2d;
 import org.wpilib.math.geometry.Translation2d;
 import org.wpilib.math.geometry.Twist2d;
-import org.wpilib.math.kinematics.ChassisSpeeds;
+import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.math.kinematics.SwerveDriveKinematics;
 import org.wpilib.math.kinematics.SwerveModuleState;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import frc.robot.util.GeomUtil;
 /**
  * "Inspired" by FRC team 254. See the license file in the root directory of this project.
  *
- * <p>Takes a prior setpoint (ChassisSpeeds), a desired setpoint (from a driver, or from a path
+ * <p>Takes a prior setpoint (ChassisVelocities), a desired setpoint (from a driver, or from a path
  * follower), and outputs a new setpoint that respects all of the kinematic constraints on module
  * rotation speed and wheel velocity/acceleration. By generating a new setpoint every iteration, the
  * robot will converge to the desired setpoint quickly while avoiding any intermediate state that is
@@ -262,7 +262,7 @@ public class SwerveSetpointGenerator {
       final ModuleLimits limits,
       double centerOfMassHeight,
       final SwerveSetpoint prevSetpoint,
-      ChassisSpeeds desiredState,
+      ChassisVelocities desiredState,
       double dt) {
     final Translation2d[] modules = moduleLocations;
 
@@ -270,7 +270,7 @@ public class SwerveSetpointGenerator {
     // Make sure desiredState respects velocity limits.
     if (limits.maxDriveVelocity() > 0.0) {
       SwerveDriveKinematics.desaturateWheelSpeeds(desiredModuleState, limits.maxDriveVelocity());
-      desiredState = kinematics.toChassisSpeeds(desiredModuleState);
+      desiredState = kinematics.toChassisVelocities(desiredModuleState);
     }
 
     // Special case: desiredState is a complete stop. In this case, module angle is arbitrary, so
@@ -327,7 +327,7 @@ public class SwerveSetpointGenerator {
       // It will (likely) be faster to stop the robot, rotate the modules in place to the complement
       // of the desired
       // angle, and accelerate again.
-      return generateSetpoint(limits, centerOfMassHeight, prevSetpoint, new ChassisSpeeds(), dt);
+      return generateSetpoint(limits, centerOfMassHeight, prevSetpoint, new ChassisVelocities(), dt);
     }
 
     // Compute the deltas between start and goal. We can then interpolate from the start state to
@@ -470,8 +470,8 @@ public class SwerveSetpointGenerator {
       }
     }
 
-    ChassisSpeeds retSpeeds =
-        new ChassisSpeeds(
+    ChassisVelocities retSpeeds =
+        new ChassisVelocities(
             prevSetpoint.chassisSpeeds().vxMetersPerSecond + min_s * dx,
             prevSetpoint.chassisSpeeds().vyMetersPerSecond + min_s * dy,
             prevSetpoint.chassisSpeeds().omegaRadiansPerSecond + min_s * dtheta);

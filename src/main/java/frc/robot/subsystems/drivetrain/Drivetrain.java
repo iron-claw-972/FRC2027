@@ -19,7 +19,7 @@ import org.wpilib.math.estimator.SwerveDrivePoseEstimator;
 import org.wpilib.math.geometry.Pose2d;
 import org.wpilib.math.geometry.Rotation2d;
 import org.wpilib.math.geometry.Translation2d;
-import org.wpilib.math.kinematics.ChassisSpeeds;
+import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.math.kinematics.SwerveDriveKinematics;
 import org.wpilib.math.kinematics.SwerveModulePosition;
 import org.wpilib.math.kinematics.SwerveModuleState;
@@ -62,7 +62,7 @@ public class Drivetrain extends SubsystemBase {
 
   private SwerveSetpoint currentSetpoint =
       new SwerveSetpoint(
-          new ChassisSpeeds(),
+          new ChassisVelocities(),
           new SwerveModuleState[] {
             new SwerveModuleState(),
             new SwerveModuleState(),
@@ -280,11 +280,11 @@ public class Drivetrain extends SubsystemBase {
   public void drive(
       double xSpeed, double ySpeed, double rot, boolean fieldRelative, boolean isOpenLoop) {
     // rot = headingControl(rot, xSpeed, ySpeed);
-    ChassisSpeeds speeds = ChassisSpeeds.discretize(xSpeed, ySpeed, rot, Constants.LOOP_TIME);
+    ChassisVelocities speeds = ChassisVelocities.discretize(xSpeed, ySpeed, rot, Constants.LOOP_TIME);
     if (fieldRelative) {
-      speeds = ChassisSpeeds.fromFieldRelativeSpeeds(speeds, getYaw());
+      speeds = ChassisVelocities.fromFieldRelativeSpeeds(speeds, getYaw());
     }
-    setChassisSpeeds(speeds, isOpenLoop);
+    setChassisVelocities(speeds, isOpenLoop);
   }
 
   /**
@@ -297,11 +297,11 @@ public class Drivetrain extends SubsystemBase {
    */
   public void driveHeading(double xSpeed, double ySpeed, double heading, boolean fieldRelative) {
     double rot = rotationController.calculate(getYaw().getRadians(), heading);
-    ChassisSpeeds speeds = new ChassisSpeeds(xSpeed, ySpeed, rot);
+    ChassisVelocities speeds = new ChassisVelocities(xSpeed, ySpeed, rot);
     if (fieldRelative) {
-      speeds = ChassisSpeeds.fromFieldRelativeSpeeds(speeds, getYaw());
+      speeds = ChassisVelocities.fromFieldRelativeSpeeds(speeds, getYaw());
     }
-    setChassisSpeeds(speeds, false);
+    setChassisVelocities(speeds, false);
   }
 
   /**
@@ -480,10 +480,10 @@ public class Drivetrain extends SubsystemBase {
    * @param chassisSpeeds the target chassis speeds
    * @param isOpenLoop if open loop control should be used for the drive velocity
    */
-  public void setChassisSpeeds(ChassisSpeeds chassisSpeeds, boolean isOpenLoop) {
+  public void setChassisVelocities(ChassisVelocities chassisSpeeds, boolean isOpenLoop) {
 
     if (DriveConstants.USE_ACTUAL_SPEED) {
-      SwerveSetpoint currentState = new SwerveSetpoint(getChassisSpeeds(), getModuleStates());
+      SwerveSetpoint currentState = new SwerveSetpoint(getChassisVelocities(), getModuleStates());
       currentSetpoint =
           setpointGenerator.generateSetpoint(
               DriveConstants.MODULE_LIMITS,
@@ -589,10 +589,10 @@ public class Drivetrain extends SubsystemBase {
   /**
    * Calculates chassis speed of drivetrain using the current SwerveModuleStates
    *
-   * @return ChassisSpeeds object This is often used as an input for other methods
+   * @return ChassisVelocities object This is often used as an input for other methods
    */
-  public ChassisSpeeds getChassisSpeeds() {
-    return DriveConstants.KINEMATICS.toChassisSpeeds(getModuleStates());
+  public ChassisVelocities getChassisVelocities() {
+    return DriveConstants.KINEMATICS.toChassisVelocities(getModuleStates());
   }
 
   /**

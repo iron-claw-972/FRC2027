@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import org.wpilib.math.geometry.Pose2d;
 import org.wpilib.math.geometry.Translation2d;
-import org.wpilib.math.kinematics.ChassisSpeeds;
+import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.command2.Command;
 import frc.robot.constants.Constants;
 import frc.robot.subsystems.drivetrain.Drivetrain;
@@ -27,7 +27,7 @@ public class GoToPose2 extends Command {
   @Override
   public void initialize() {
     pose = poseSupplier.get();
-    ChassisSpeeds v = drive.getChassisSpeeds();
+    ChassisVelocities v = drive.getChassisVelocities();
     vx = v.vxMetersPerSecond;
     vy = v.vyMetersPerSecond;
     error = null;
