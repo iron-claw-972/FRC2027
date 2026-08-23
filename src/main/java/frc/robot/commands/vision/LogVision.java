@@ -1,0 +1,38 @@
+package frc.robot.commands.vision;
+
+import java.util.function.Supplier;
+
+import org.littletonrobotics.junction.Logger;
+
+import org.wpilib.command2.Command;
+import frc.robot.constants.Constants;
+import frc.robot.util.Vision.DetectedObject;
+
+public class LogVision extends Command {
+  private Supplier<DetectedObject> objectSupplier;
+
+  public LogVision(Supplier<DetectedObject> objectSupplier) {
+    this.objectSupplier = objectSupplier;
+  }
+
+  @Override
+  public void execute() {
+    DetectedObject object = this.objectSupplier.get();
+    if (object != null) {
+      if (!Constants.DISABLE_LOGGING) {
+        Logger.recordOutput("Vision/object_angle", object.getAngle());
+        Logger.recordOutput("Vision/object_distance", object.getDistance());
+      }
+    }
+  }
+
+  @Override
+  public boolean runsWhenDisabled() {
+    return true;
+  }
+
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
+}
