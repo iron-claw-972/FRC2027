@@ -28,8 +28,8 @@ public class GoToPose2 extends Command {
   public void initialize() {
     pose = poseSupplier.get();
     ChassisVelocities v = drive.getChassisVelocities();
-    vx = v.vxMetersPerSecond;
-    vy = v.vyMetersPerSecond;
+    vx = v.vx;
+    vy = v.vy;
     error = null;
   }
 

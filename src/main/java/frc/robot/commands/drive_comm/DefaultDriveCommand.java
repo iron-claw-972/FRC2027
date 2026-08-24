@@ -53,27 +53,27 @@ public class DefaultDriveCommand extends Command {
     forwardTranslation *= allianceReversal;
     sideTranslation *= allianceReversal;
 
-    ChassisSpeeds driverInput = new ChassisSpeeds(forwardTranslation, sideTranslation, rotation);
-    ChassisSpeeds corrected =
+    ChassisVelocities driverInput = new ChassisVelocities(forwardTranslation, sideTranslation, rotation);
+    ChassisVelocities corrected =
         DriverAssist.calculate(swerve, driverInput, swerve.getDesiredPose(), true);
   }
 
   /**
    * Drives the robot
    *
-   * @param speeds The ChassisSpeeds to drive at
+   * @param speeds The ChassisVelocities to drive at
    */
-  protected void drive(ChassisSpeeds speeds) {
+  protected void drive(ChassisVelocities speeds) {
     // If the driver is pressing the align button or a command set the drivetrain to
     // align, then align to speaker
     if (driver.getIsAlign() || swerve.getIsAlign()) {
       swerve.driveHeading(
-          speeds.vxMetersPerSecond, speeds.vyMetersPerSecond, swerve.getAlignAngle(), true);
+          speeds.vx, speeds.vy, swerve.getAlignAngle(), true);
     } else {
       swerve.drive(
-          speeds.vxMetersPerSecond,
-          speeds.vyMetersPerSecond,
-          speeds.omegaRadiansPerSecond,
+          speeds.vx,
+          speeds.vy,
+          speeds.omega,
           true,
           false);
     }

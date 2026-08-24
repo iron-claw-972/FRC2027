@@ -26,7 +26,7 @@ import org.wpilib.math.util.MathUtil;
 import org.wpilib.math.filter.Debouncer;
 import org.wpilib.math.geometry.Rotation2d;
 import org.wpilib.math.kinematics.SwerveModulePosition;
-import org.wpilib.math.kinematics.SwerveModuleState;
+import org.wpilib.math.kinematics.SwerveModuleVelocity;
 import org.wpilib.math.util.Units;
 import org.wpilib.units.measure.Angle;
 import frc.robot.constants.Constants;
@@ -50,7 +50,7 @@ public class Module implements ModuleIO {
   private final TalonFX angleMotor;
   private final TalonFX driveMotor;
   private final CANcoder CANcoder;
-  private SwerveModuleState desiredState;
+  private SwerveModuleVelocity desiredState;
 
   protected boolean stateDeadband = true;
 
@@ -158,7 +158,7 @@ public class Module implements ModuleIO {
         turnAppliedVolts,
         turnCurrent);
 
-    setDesiredState(new SwerveModuleState(0, getAngle()), false);
+    setDesiredState(new SwerveModuleVelocity(0, getAngle()), false);
   }
 
   public void close() {
@@ -252,7 +252,7 @@ public class Module implements ModuleIO {
     }
   }
 
-  public void setDesiredState(SwerveModuleState wantedState, boolean isOpenLoop) {
+  public void setDesiredState(SwerveModuleVelocity wantedState, boolean isOpenLoop) {
     // Separate if here and in setAngle() to avoid warning
     if (!DriveConstants.DISABLE_DEADBAND_AND_OPTIMIZATION) {
       /*
@@ -481,8 +481,8 @@ public class Module implements ModuleIO {
     driveMotor.optimizeBusUtilization();
   }
 
-  public SwerveModuleState getState() {
-    return new SwerveModuleState(
+  public SwerveModuleVelocity getState() {
+    return new SwerveModuleVelocity(
         inputs.driveVelocityRadPerSec * DriveConstants.WHEEL_RADIUS, getAngle());
   }
 
@@ -491,7 +491,7 @@ public class Module implements ModuleIO {
         inputs.drivePositionRad * DriveConstants.WHEEL_RADIUS, getAngle());
   }
 
-  public SwerveModuleState getDesiredState() {
+  public SwerveModuleVelocity getDesiredState() {
     return desiredState;
   }
 

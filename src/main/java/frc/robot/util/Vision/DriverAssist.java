@@ -67,10 +67,10 @@ public class DriverAssist {
             driveSpeeds,
             yaw); // Changing this does not cause problems because getChassisVelocities() creates a new
     // object
-    State xState = new State(currentPose.getX(), driveSpeeds.vxMetersPerSecond);
-    State yState = new State(currentPose.getY(), driveSpeeds.vyMetersPerSecond);
+    State xState = new State(currentPose.getX(), driveSpeeds.vx);
+    State yState = new State(currentPose.getY(), driveSpeeds.vy);
     State angleState =
-        new State(currentPose.getRotation().getRadians(), driveSpeeds.omegaRadiansPerSecond);
+        new State(currentPose.getRotation().getRadians(), driveSpeeds.omega);
 
     // Store goal states
     State xGoal = new State(desiredPose.getX(), 0);
@@ -133,7 +133,7 @@ public class DriverAssist {
 
     // Driver input speed
     double driverInputSpeed =
-        Math.hypot(driverInput.vxMetersPerSecond, driverInput.vyMetersPerSecond);
+        Math.hypot(driverInput.vx, driverInput.vy);
 
     // The amount to correct by
     ChassisVelocities correction =
@@ -144,7 +144,7 @@ public class DriverAssist {
 
     return driverSpeeds.plus(correction);
     // return
-    // nextChassisSpeed.times(CORRECTION_FACTOR).plus(driverInput.times(1-CORRECTION_FACTOR));
+    // nextChassisVelocities.times(CORRECTION_FACTOR).plus(driverInput.times(1-CORRECTION_FACTOR));
   }
 
   // Constants used for second method
@@ -180,8 +180,8 @@ public class DriverAssist {
         keepAngle
             ? desiredPose.getRotation().getRadians()
             : MathUtil.angleModulus(velocityAngle + Math.PI / 2);
-    double inputSpeed = Math.hypot(driverInput.vxMetersPerSecond, driverInput.vyMetersPerSecond);
-    double driverAngle = Math.atan2(driverInput.vyMetersPerSecond, driverInput.vxMetersPerSecond);
+    double inputSpeed = Math.hypot(driverInput.vx, driverInput.vy);
+    double driverAngle = Math.atan2(driverInput.vy, driverInput.vx);
     double velocityAngleError = MathUtil.angleModulus(velocityAngle - driverAngle);
     if (Math.abs(velocityAngleError) > MAX_VELOCITY_ANGLE_ERROR) {
       return driverInput;
@@ -229,7 +229,7 @@ public class DriverAssist {
         ROTATION_CORRECTION_FACTOR
                 * Math.signum(rotationError)
                 * Math.sqrt(2 * DriveConstants.MAX_ANGULAR_ACCEL * Math.abs(rotationError))
-            - ROTATION_CORRECTION_FACTOR * driverInput.omegaRadiansPerSecond;
+            - ROTATION_CORRECTION_FACTOR * driverInput.omega;
     return driverInput.plus(
         new ChassisVelocities(
             correctionSpeed * Math.cos(perpendicularAngle),

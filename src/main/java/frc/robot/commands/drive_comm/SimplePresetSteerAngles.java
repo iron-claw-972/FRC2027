@@ -1,7 +1,7 @@
 package frc.robot.commands.drive_comm;
 
 import org.wpilib.math.geometry.Rotation2d;
-import org.wpilib.math.kinematics.SwerveModuleState;
+import org.wpilib.math.kinematics.SwerveModuleVelocity;
 import org.wpilib.command2.InstantCommand;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
@@ -41,11 +41,11 @@ public class SimplePresetSteerAngles extends InstantCommand {
         () -> {
           drive.setStateDeadband(false);
           drive.setModuleStates(
-              new SwerveModuleState[] {
-                new SwerveModuleState(0, rotation),
-                new SwerveModuleState(0, rotation),
-                new SwerveModuleState(0, rotation),
-                new SwerveModuleState(0, rotation)
+              new SwerveModuleVelocity[] {
+                new SwerveModuleVelocity(0, rotation),
+                new SwerveModuleVelocity(0, rotation),
+                new SwerveModuleVelocity(0, rotation),
+                new SwerveModuleVelocity(0, rotation)
               },
               true);
           drive.setStateDeadband(true);

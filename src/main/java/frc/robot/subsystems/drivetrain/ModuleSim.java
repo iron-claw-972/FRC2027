@@ -4,7 +4,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import org.wpilib.math.geometry.Rotation2d;
 import org.wpilib.math.kinematics.SwerveModulePosition;
-import org.wpilib.math.kinematics.SwerveModuleState;
+import org.wpilib.math.kinematics.SwerveModuleVelocity;
 import org.wpilib.system.Timer;
 import frc.robot.constants.Constants;
 import frc.robot.constants.swerve.DriveConstants;
@@ -21,7 +21,7 @@ public class ModuleSim extends Module {
   private double currentDrivePositionMeters = 0;
   private double currentSpeed = 0;
 
-  private SwerveModuleState desiredState;
+  private SwerveModuleVelocity desiredState;
 
   protected boolean stateDeadband = true;
 
@@ -71,7 +71,7 @@ public class ModuleSim extends Module {
    * @param desiredState Desired state with speed and angle.
    * @param isOpenLoop whether to use closed/open loop control for drive velocity
    */
-  public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop) {
+  public void setDesiredState(SwerveModuleVelocity desiredState, boolean isOpenLoop) {
     if (!DriveConstants.DISABLE_DEADBAND_AND_OPTIMIZATION) {
       // If the module isn't moving, don't rotate it
       if (Math.abs(desiredState.speedMetersPerSecond) < 0.001) {
@@ -91,7 +91,7 @@ public class ModuleSim extends Module {
     // does nothing when robot does not have a swerve drivetrain
   }
 
-  public SwerveModuleState getDesiredState() {
+  public SwerveModuleVelocity getDesiredState() {
     return desiredState;
   }
 
@@ -108,8 +108,8 @@ public class ModuleSim extends Module {
     currentSpeed = 0;
   }
 
-  public SwerveModuleState getState() {
-    return new SwerveModuleState(currentSpeed, getAngle());
+  public SwerveModuleVelocity getState() {
+    return new SwerveModuleVelocity(currentSpeed, getAngle());
   }
 
   public SwerveModulePosition getPosition() {

@@ -2,7 +2,7 @@ package frc.robot.commands.drive_comm;
 
 import org.wpilib.math.geometry.Pose2d;
 import org.wpilib.math.kinematics.ChassisVelocities;
-import org.wpilib.math.kinematics.SwerveModuleState;
+import org.wpilib.math.kinematics.SwerveModuleVelocity;
 import org.wpilib.math.trajectory.Trajectory;
 import org.wpilib.math.trajectory.Trajectory.State;
 import org.wpilib.command2.InstantCommand;
@@ -29,8 +29,8 @@ public class TrajectoryPresetSteerAngles extends InstantCommand {
           State sample = trajectory.sample(time);
           Pose2d nextPose = sample.poseMeters;
 
-          double xVelocity = sample.velocityMetersPerSecond * nextPose.getRotation().getCos();
-          double yVelocity = sample.velocityMetersPerSecond * nextPose.getRotation().getSin();
+          double xVelocity = sample.velocity * nextPose.getRotation().getCos();
+          double yVelocity = sample.velocity * nextPose.getRotation().getSin();
           double angularVelo =
               (nextPose.getRotation().getRadians() - initialPose.getRotation().getRadians()) / time;
 
@@ -38,12 +38,12 @@ public class TrajectoryPresetSteerAngles extends InstantCommand {
           chassisSpeeds =
               ChassisVelocities.fromFieldRelativeSpeeds(chassisSpeeds, initialPose.getRotation());
 
-          SwerveModuleState[] swerveModuleStates =
-              DriveConstants.KINEMATICS.toSwerveModuleStates(chassisSpeeds);
-          for (SwerveModuleState swerveModuleState : swerveModuleStates) {
-            swerveModuleState.speedMetersPerSecond = 0;
+          SwerveModuleVelocity[] SwerveModuleVelocitys =
+              DriveConstants.KINEMATICS.toSwerveModuleVelocitys(chassisSpeeds);
+          for (SwerveModuleVelocity SwerveModuleVelocity : SwerveModuleVelocitys) {
+            SwerveModuleVelocity.speedMetersPerSecond = 0;
           }
-          drive.setModuleStates(swerveModuleStates, true);
+          drive.setModuleStates(SwerveModuleVelocitys, true);
           drive.setStateDeadband(true);
         },
         drive);

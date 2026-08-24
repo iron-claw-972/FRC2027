@@ -14,7 +14,7 @@ import org.wpilib.math.geometry.Translation2d;
 import org.wpilib.math.geometry.Twist2d;
 import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.math.kinematics.SwerveDriveKinematics;
-import org.wpilib.math.kinematics.SwerveModuleState;
+import org.wpilib.math.kinematics.SwerveModuleVelocity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -266,7 +266,7 @@ public class SwerveSetpointGenerator {
       double dt) {
     final Translation2d[] modules = moduleLocations;
 
-    SwerveModuleState[] desiredModuleState = kinematics.toSwerveModuleStates(desiredState);
+    SwerveModuleVelocity[] desiredModuleState = kinematics.toSwerveModuleVelocitys(desiredState);
     // Make sure desiredState respects velocity limits.
     if (limits.maxDriveVelocity() > 0.0) {
       SwerveDriveKinematics.desaturateWheelSpeeds(desiredModuleState, limits.maxDriveVelocity());
@@ -334,10 +334,10 @@ public class SwerveSetpointGenerator {
     // the goal state; then
     // find the amount we can move from start towards goal in this cycle such that no kinematic
     // limit is exceeded.
-    double dx = desiredState.vxMetersPerSecond - prevSetpoint.chassisSpeeds().vxMetersPerSecond;
-    double dy = desiredState.vyMetersPerSecond - prevSetpoint.chassisSpeeds().vyMetersPerSecond;
+    double dx = desiredState.vx - prevSetpoint.chassisSpeeds().vx;
+    double dy = desiredState.vy - prevSetpoint.chassisSpeeds().vy;
     double dtheta =
-        desiredState.omegaRadiansPerSecond - prevSetpoint.chassisSpeeds().omegaRadiansPerSecond;
+        desiredState.omega - prevSetpoint.chassisSpeeds().omega;
 
     // 's' interpolates between start and goal. At 0, we are at prevState and at 1, we are at
     // desiredState.
@@ -455,10 +455,10 @@ public class SwerveSetpointGenerator {
       // x and y are limited separately because, when tipping in a diagonal direction, the distance
       // is longer
       double xAccel =
-          Math.abs(desiredState.vxMetersPerSecond - prevSetpoint.chassisSpeeds().vxMetersPerSecond)
+          Math.abs(desiredState.vx - prevSetpoint.chassisSpeeds().vx)
               / dt;
       double yAccel =
-          Math.abs(desiredState.vyMetersPerSecond - prevSetpoint.chassisSpeeds().vyMetersPerSecond)
+          Math.abs(desiredState.vy - prevSetpoint.chassisSpeeds().vy)
               / dt;
       if (!epsilonEquals(xAccel, 0)) {
         double s = maxAccel / xAccel;
@@ -472,10 +472,10 @@ public class SwerveSetpointGenerator {
 
     ChassisVelocities retSpeeds =
         new ChassisVelocities(
-            prevSetpoint.chassisSpeeds().vxMetersPerSecond + min_s * dx,
-            prevSetpoint.chassisSpeeds().vyMetersPerSecond + min_s * dy,
-            prevSetpoint.chassisSpeeds().omegaRadiansPerSecond + min_s * dtheta);
-    var retStates = kinematics.toSwerveModuleStates(retSpeeds);
+            prevSetpoint.chassisSpeeds().vx + min_s * dx,
+            prevSetpoint.chassisSpeeds().vy + min_s * dy,
+            prevSetpoint.chassisSpeeds().omega + min_s * dtheta);
+    var retStates = kinematics.toSwerveModuleVelocitys(retSpeeds);
     for (int i = 0; i < modules.length; ++i) {
       final var maybeOverride = overrideSteering.get(i);
       if (maybeOverride.isPresent()) {

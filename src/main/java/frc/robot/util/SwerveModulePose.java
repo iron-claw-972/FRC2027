@@ -11,7 +11,7 @@ import org.wpilib.math.geometry.Pose2d;
 import org.wpilib.math.geometry.Rotation2d;
 import org.wpilib.math.geometry.Translation2d;
 import org.wpilib.math.geometry.Twist2d;
-import org.wpilib.math.kinematics.SwerveModuleState;
+import org.wpilib.math.kinematics.SwerveModuleVelocity;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
 /** Stores and updates the position of each module */
@@ -43,7 +43,7 @@ public class SwerveModulePose {
 
   /** Updates the module positions */
   public void update() {
-    SwerveModuleState[] states = drive.getModuleStates();
+    SwerveModuleVelocity[] states = drive.getModuleStates();
     double currentRotation = drive.getYaw().getRadians();
     double chassisRotation = currentRotation - prevRotation;
 
@@ -84,7 +84,7 @@ public class SwerveModulePose {
   /** Resets the modules to the correct positions relative to the robot */
   public void reset() {
     Pose2d chassisPose2d = drive.getPose();
-    SwerveModuleState[] states = drive.getModuleStates();
+    SwerveModuleVelocity[] states = drive.getModuleStates();
     for (int i = 0; i < 4; i++) {
       angles[i] = states[i].angle.getRadians();
       this.modulePositions[i] =

@@ -105,10 +105,10 @@ public class DriveToPose extends Command {
     ChassisVelocities fieldVelocity =
         ChassisVelocities.fromRobotRelativeSpeeds(drive.getChassisVelocities(), currentPose.getRotation());
     Translation2d linearFieldVelocity =
-        new Translation2d(fieldVelocity.vxMetersPerSecond, fieldVelocity.vyMetersPerSecond);
+        new Translation2d(fieldVelocity.vx, fieldVelocity.vy);
 
     thetaController.reset(
-        currentPose.getRotation().getRadians(), fieldVelocity.omegaRadiansPerSecond);
+        currentPose.getRotation().getRadians(), fieldVelocity.omega);
     lastSetpointTranslation = currentPose.getTranslation();
 
     if (targetPose != null) {

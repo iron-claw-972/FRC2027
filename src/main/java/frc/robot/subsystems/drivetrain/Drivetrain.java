@@ -22,7 +22,7 @@ import org.wpilib.math.geometry.Translation2d;
 import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.math.kinematics.SwerveDriveKinematics;
 import org.wpilib.math.kinematics.SwerveModulePosition;
-import org.wpilib.math.kinematics.SwerveModuleState;
+import org.wpilib.math.kinematics.SwerveModuleVelocity;
 import org.wpilib.math.util.Units;
 import org.wpilib.units.measure.Voltage;
 import org.wpilib.framework.RobotBase;
@@ -63,11 +63,11 @@ public class Drivetrain extends SubsystemBase {
   private SwerveSetpoint currentSetpoint =
       new SwerveSetpoint(
           new ChassisVelocities(),
-          new SwerveModuleState[] {
-            new SwerveModuleState(),
-            new SwerveModuleState(),
-            new SwerveModuleState(),
-            new SwerveModuleState()
+          new SwerveModuleVelocity[] {
+            new SwerveModuleVelocity(),
+            new SwerveModuleVelocity(),
+            new SwerveModuleVelocity(),
+            new SwerveModuleVelocity()
           });
   // Odometry
   private final SwerveDrivePoseEstimator poseEstimator;
@@ -421,7 +421,7 @@ public class Drivetrain extends SubsystemBase {
 
     // if (Robot.isSimulation()) {
     // pigeon.getSimState().addYaw(
-    // +Units.radiansToDegrees(currentSetpoint.chassisSpeeds().omegaRadiansPerSecond
+    // +Units.radiansToDegrees(currentSetpoint.chassisSpeeds().omega
     // * Constants.LOOP_TIME));
     // }
   }
@@ -462,15 +462,15 @@ public class Drivetrain extends SubsystemBase {
   /**
    * Sets the desired states for all swerve modules.
    *
-   * @param swerveModuleStates an array of module states to set swerve modules to. Order of the
+   * @param SwerveModuleVelocitys an array of module states to set swerve modules to. Order of the
    *     array matters here!
    */
-  public void setModuleStates(SwerveModuleState[] swerveModuleStates, boolean isOpenLoop) {
+  public void setModuleStates(SwerveModuleVelocity[] SwerveModuleVelocitys, boolean isOpenLoop) {
     // makes sure speeds of modules don't exceed maximum allowed
-    SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, DriveConstants.MAX_SPEED);
+    SwerveDriveKinematics.desaturateWheelSpeeds(SwerveModuleVelocitys, DriveConstants.MAX_SPEED);
 
     for (int i = 0; i < 4; i++) {
-      modules[i].setDesiredState(swerveModuleStates[i], isOpenLoop);
+      modules[i].setDesiredState(SwerveModuleVelocitys[i], isOpenLoop);
     }
   }
 
@@ -501,8 +501,8 @@ public class Drivetrain extends SubsystemBase {
               Constants.LOOP_TIME);
     }
 
-    SwerveModuleState[] swerveModuleStates = currentSetpoint.moduleStates();
-    setModuleStates(swerveModuleStates, isOpenLoop);
+    SwerveModuleVelocity[] SwerveModuleVelocitys = currentSetpoint.moduleStates();
+    setModuleStates(SwerveModuleVelocitys, isOpenLoop);
   }
 
   public void setDriveVoltages(Voltage voltage) {
@@ -587,7 +587,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   /**
-   * Calculates chassis speed of drivetrain using the current SwerveModuleStates
+   * Calculates chassis speed of drivetrain using the current SwerveModuleVelocitys
    *
    * @return ChassisVelocities object This is often used as an input for other methods
    */
@@ -598,10 +598,10 @@ public class Drivetrain extends SubsystemBase {
   /**
    * Gets the state of each module
    *
-   * @return An array of 4 SwerveModuleStates
+   * @return An array of 4 SwerveModuleVelocitys
    */
-  public SwerveModuleState[] getModuleStates() {
-    return Arrays.stream(modules).map(Module::getState).toArray(SwerveModuleState[]::new);
+  public SwerveModuleVelocity[] getModuleStates() {
+    return Arrays.stream(modules).map(Module::getState).toArray(SwerveModuleVelocity[]::new);
   }
 
   public SwerveSetpoint getCurrSetpoint() {
@@ -843,7 +843,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void alignWheels() {
-    SwerveModuleState state = new SwerveModuleState(0, new Rotation2d(0));
-    setModuleStates(new SwerveModuleState[] {state, state, state, state}, false);
+    SwerveModuleVelocity state = new SwerveModuleVelocity(0, new Rotation2d(0));
+    setModuleStates(new SwerveModuleVelocity[] {state, state, state, state}, false);
   }
 }

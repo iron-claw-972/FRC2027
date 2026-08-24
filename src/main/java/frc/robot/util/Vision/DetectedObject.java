@@ -372,7 +372,7 @@ public class DetectedObject {
   public double getVelocityRelativeAngle() {
     ChassisVelocities speeds = drive.getChassisVelocities();
     double angle =
-        getRelativeAngle() - Math.atan2(speeds.vyMetersPerSecond, speeds.vxMetersPerSecond);
+        getRelativeAngle() - Math.atan2(speeds.vy, speeds.vx);
     return MathUtil.angleModulus(angle);
   }
 
