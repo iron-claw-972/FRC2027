@@ -8,7 +8,7 @@ import org.wpilib.math.geometry.Transform3d;
 import org.wpilib.math.geometry.Translation3d;
 import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.math.util.Units;
-import org.wpilib.driverstation.DriverStation.Alliance;
+import org.wpilib.driverstation.Alliance;
 import frc.robot.Robot;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 
@@ -321,7 +321,7 @@ public class DetectedObject {
    */
   public boolean isSameAllianceRobot() {
     return type
-        == (Robot.getAlliance() == Alliance.Red ? ObjectType.RED_ROBOT : ObjectType.BLUE_ROBOT);
+        == (Robot.getAlliance() == Alliance.RED ? ObjectType.RED_ROBOT : ObjectType.BLUE_ROBOT);
   }
 
   /**
@@ -331,7 +331,7 @@ public class DetectedObject {
    */
   public boolean isOtherAllianceRobot() {
     return type
-        == (Robot.getAlliance() == Alliance.Red ? ObjectType.BLUE_ROBOT : ObjectType.RED_ROBOT);
+        == (Robot.getAlliance() == Alliance.RED ? ObjectType.BLUE_ROBOT : ObjectType.RED_ROBOT);
   }
 
   /**

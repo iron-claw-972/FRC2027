@@ -2,7 +2,7 @@ package frc.robot.commands.drive_comm;
 
 import org.wpilib.math.controller.PIDController;
 import org.wpilib.math.kinematics.ChassisVelocities;
-import org.wpilib.driverstation.DriverStation.Alliance;
+import org.wpilib.driverstation.Alliance;
 import org.wpilib.smartdashboard.SmartDashboard;
 import org.wpilib.command2.Command;
 import frc.robot.Robot;
@@ -49,7 +49,7 @@ public class DefaultDriveCommand extends Command {
     sideTranslation *= slowFactor;
     rotation *= driver.getIsSlowMode() ? DriveConstants.SLOW_ROT_FACTOR : 1;
 
-    int allianceReversal = Robot.getAlliance() == Alliance.Red ? 1 : -1;
+    int allianceReversal = Robot.getAlliance() == Alliance.RED ? 1 : -1;
     forwardTranslation *= allianceReversal;
     sideTranslation *= allianceReversal;
 

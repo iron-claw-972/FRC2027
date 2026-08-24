@@ -7,10 +7,10 @@ import org.littletonrobotics.junction.Logger;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.AutoBuilderException;
 import com.pathplanner.lib.commands.PathPlannerAuto;
-
-import choreo.auto.AutoChooser;
-import choreo.auto.AutoFactory;
-import choreo.auto.AutoRoutine;
+// TODO: 2027-ALPHA-FIX - Re-enable Choreo when updated
+// import choreo.auto.AutoChooser;
+// import choreo.auto.AutoFactory;
+// import choreo.auto.AutoRoutine;
 import org.wpilib.math.geometry.Pose3d;
 import org.wpilib.driverstation.DriverStation;
 import org.wpilib.system.RobotController;
@@ -21,7 +21,7 @@ import org.wpilib.command2.Command;
 import org.wpilib.command2.CommandScheduler;
 import frc.robot.commands.DoNothing;
 import frc.robot.commands.LogCommand;
-import frc.robot.commands.auto_comm.ChoreoPathCommandBuilder;
+// import frc.robot.commands.auto_comm.ChoreoPathCommandBuilder;
 import frc.robot.commands.auto_comm.DynamicAutoBuilder;
 import frc.robot.commands.drive_comm.SysIDDriveCommand;
 import frc.robot.constants.AutoConstants;
@@ -230,15 +230,15 @@ public class RobotContainer {
     String rightDynamicConservativeDoubleSwipe = "RightDynamicDoubleConservativeSwipe";
     // String leftDynamicShallowDoubleSwipe = "LeftDynamicShallowDoubleSwipe";
     // String rightDynamicShallowDoubleSwipe = "RightDynamicShallowDoubleSwipe";
-
-    ChoreoPathCommandBuilder choreo = new ChoreoPathCommandBuilder();
+    // TODO: 2027-ALPHA-FIX - Re-enable Choreo vendordep when JSON is updated
+    // ChoreoPathCommandBuilder choreo = new ChoreoPathCommandBuilder();
 
     // addAuto("testChoreo", ChoreoPathCommandBuilder.basicTrajectoryAuto("test.traj", true,
     // autoFactory));
 
     // put the Chooser on the SmartDashboard
     SmartDashboard.putData("Auto chooser", autoChooser);
-    SmartDashboard.putData("Choreo auto chooser", choreoAutoChooser);
+   // SmartDashboard.putData("Choreo auto chooser", choreoAutoChooser);
   }
 
   public static BooleanSupplier getAllianceColorBooleanSupplier() {
@@ -250,7 +250,7 @@ public class RobotContainer {
 
       var alliance = DriverStation.getAlliance();
       if (alliance.isPresent()) {
-        return alliance.get() == DriverStation.Alliance.Red;
+        return alliance.get() == DriverStation.Alliance.RED;
       }
       return false;
     };

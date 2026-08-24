@@ -6,7 +6,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.PathConstraints;
 
 import org.wpilib.math.geometry.Pose2d;
-import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.DriverStationErrors;
 import org.wpilib.command2.Command;
 import org.wpilib.command2.InstantCommand;
 import org.wpilib.command2.SequentialCommandGroup;
@@ -83,10 +83,10 @@ public class GoToPose extends SequentialCommandGroup {
     // makes weird paths.
     if (dist > 3) {
       command = new DoNothing();
-      DriverStation.reportWarning("Alignment Path too long, doing nothing, GoToPose.java", false);
+      DriverStationErrors.reportWarning("Alignment Path too long, doing nothing, GoToPose.java", false);
     } else if (dist < 0.02) {
       command = new DoNothing();
-      DriverStation.reportWarning("Alignment Path too short, doing nothing, GoToPose.java", false);
+      DriverStationErrors.reportWarning("Alignment Path too short, doing nothing, GoToPose.java", false);
     }
 
     return command;

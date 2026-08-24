@@ -3,7 +3,7 @@ package frc.robot.controls;
 import java.util.function.BooleanSupplier;
 
 import org.wpilib.math.geometry.Rotation2d;
-import org.wpilib.driverstation.DriverStation.Alliance;
+import org.wpilib.driverstation.Alliance;
 import org.wpilib.command2.CommandScheduler;
 import org.wpilib.command2.InstantCommand;
 import frc.robot.Robot;
@@ -31,7 +31,7 @@ public class PS5ControllerDriverConfig extends BaseDriverConfig {
                 () ->
                     getDrivetrain()
                         .setYaw(
-                            new Rotation2d(Robot.getAlliance() == Alliance.Blue ? 0 : Math.PI))));
+                            new Rotation2d(Robot.getAlliance() == Alliance.BLUE ? 0 : Math.PI))));
 
     // Cancel commands
     controller

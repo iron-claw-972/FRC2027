@@ -2,7 +2,6 @@ package frc.robot.commands.drive_comm;
 
 import org.wpilib.math.geometry.Rotation2d;
 import org.wpilib.math.kinematics.SwerveModuleVelocity;
-import org.wpilib.math.kinematics.SwerveModuleVelocity;
 import org.wpilib.math.util.Units;
 import org.wpilib.command2.InstantCommand;
 import org.wpilib.command2.RunCommand;

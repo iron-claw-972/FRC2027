@@ -1,6 +1,6 @@
 package frc.robot.util;
 
-import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.DriverStationErrors;
 import org.wpilib.system.Filesystem;
 import frc.robot.constants.AutoConstants;
 
@@ -41,13 +41,13 @@ public class PathGroupLoader {
             System.out.println(
                 "Processed file: " + file.getName() + ", took " + time + " milliseconds.");
           } catch (Exception e) {
-            DriverStation.reportError(e.getMessage(), true);
+            DriverStationErrors.reportError(e.getMessage(), true);
           }
         }
       }
     } else {
       System.out.println("Error processing file");
-      DriverStation.reportWarning("Issue with finding path files. Paths will not be loaded.", true);
+      DriverStationErrors.reportWarning("Issue with finding path files. Paths will not be loaded.", true);
     }
     System.out.println("File processing took a total of " + totalTime + " milliseconds");
   }

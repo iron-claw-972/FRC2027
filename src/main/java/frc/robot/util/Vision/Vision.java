@@ -30,6 +30,7 @@ import org.wpilib.networktables.NetworkTable;
 import org.wpilib.networktables.NetworkTableEntry;
 import org.wpilib.networktables.NetworkTableInstance;
 import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.DriverStationErrors;
 import org.wpilib.framework.RobotBase;
 import org.wpilib.system.Timer;
 import frc.robot.constants.Constants;
@@ -434,7 +435,7 @@ public class Vision {
     try {
       cameras.get(index).enable(enabled);
     } catch (IndexOutOfBoundsException e) {
-      DriverStation.reportWarning("Camera index " + index + " is out of bounds", false);
+      DriverStationErrors.reportWarning("Camera index " + index + " is out of bounds", false);
     }
   }
 

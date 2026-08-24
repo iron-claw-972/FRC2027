@@ -19,7 +19,7 @@ import com.ctre.phoenix6.signals.StripTypeValue;
 import com.ctre.phoenix6.signals.VBatOutputModeValue;
 
 import org.wpilib.driverstation.DriverStation;
-import org.wpilib.driverstation.DriverStation.Alliance;
+import org.wpilib.driverstation.Alliance;
 import org.wpilib.util.Color;
 import org.wpilib.command2.SubsystemBase;
 import frc.robot.constants.Constants;
@@ -66,9 +66,9 @@ public class LED extends SubsystemBase {
     var alliance = DriverStation.getAlliance();
     if (alliance.isEmpty()) {
       color = Color.kOrangeRed;
-    } else if (alliance.get() == Alliance.Red) {
+    } else if (alliance.get() == Alliance.RED) {
       color = Color.kRed;
-    } else if (alliance.get() == Alliance.Blue) {
+    } else if (alliance.get() == Alliance.BLUE) {
       color = Color.kBlue;
     } else {
       color = Color.kOrangeRed;

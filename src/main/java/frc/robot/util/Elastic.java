@@ -14,14 +14,18 @@ import org.wpilib.networktables.StringPublisher;
 import org.wpilib.networktables.StringTopic;
 
 public final class Elastic {
+  PubSubOption optionTrue = PubSubOption.SEND_ALL;
+  PubSubOption optionFalse = PubSubOption.SEND_CHANGES;
+  PubSubOption keepDuplicates = PubSubOption.KEEP_DUPLICATES;
+
   private static final StringTopic notificationTopic =
       NetworkTableInstance.getDefault().getStringTopic("/Elastic/RobotNotifications");
   private static final StringPublisher notificationPublisher =
-      notificationTopic.publish(PubSubOption.sendAll(true), PubSubOption.keepDuplicates(true));
+      notificationTopic.publish(PubSubOption.SEND_ALL, PubSubOption.KEEP_DUPLICATES);
   private static final StringTopic selectedTabTopic =
       NetworkTableInstance.getDefault().getStringTopic("/Elastic/SelectedTab");
   private static final StringPublisher selectedTabPublisher =
-      selectedTabTopic.publish(PubSubOption.keepDuplicates(true));
+      selectedTabTopic.publish(PubSubOption.KEEP_DUPLICATES);
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
   /**

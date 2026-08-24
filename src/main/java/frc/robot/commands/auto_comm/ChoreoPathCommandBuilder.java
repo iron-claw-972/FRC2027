@@ -1,4 +1,4 @@
-// TODO: 2027-ALPHA-FIX - Re-enable Choreo vendordep when JSON is updated
+// TODO: 2027-ALPHA-FIX - Re-enable Choreo dep when updated
 // package frc.robot.commands.auto_comm;
 
 // import choreo.auto.AutoFactory;

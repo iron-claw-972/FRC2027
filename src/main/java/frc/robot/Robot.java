@@ -12,11 +12,11 @@ import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
-
-import au.grapplerobotics.CanBridge;
+// TODO: 2027-ALPHA-FIX - Re-enable grapplerobotics dep when updated
+// import au.grapplerobotics.CanBridge;
 import org.wpilib.net.PortForwarder;
 import org.wpilib.driverstation.DriverStation;
-import org.wpilib.driverstation.DriverStation.Alliance;
+import org.wpilib.driverstation.Alliance;
 import org.wpilib.system.RobotController;
 import org.wpilib.command2.Command;
 import org.wpilib.command2.CommandScheduler;
@@ -36,7 +36,7 @@ public class Robot extends LoggedRobot {
   private RobotContainer robotContainer;
 
   public Robot() {
-    CanBridge.runTCP();
+    // CanBridge.runTCP();
     PortForwarder.add(5800, Constants.VISION_CAMERA_HOST, 5800);
     PortForwarder.add(1182, Constants.VISION_CAMERA_HOST, 1182);
 
@@ -198,6 +198,6 @@ public class Robot extends LoggedRobot {
   public static Alliance getAlliance() {
     Optional<Alliance> dsAlliance = DriverStation.getAlliance();
     if (dsAlliance.isPresent()) return dsAlliance.get();
-    else return Alliance.Red; // default to Red alliance
+    else return Alliance.RED; // default to RED alliance
   }
 }

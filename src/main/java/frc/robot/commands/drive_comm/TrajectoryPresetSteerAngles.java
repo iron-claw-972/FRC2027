@@ -27,7 +27,7 @@ public class TrajectoryPresetSteerAngles extends InstantCommand {
 
           Pose2d initialPose = trajectory.getInitialPose();
           State sample = trajectory.sample(time);
-          Pose2d nextPose = sample.poseMeters;
+          Pose2d nextPose = sample.pose;
 
           double xVelocity = sample.velocity * nextPose.getRotation().getCos();
           double yVelocity = sample.velocity * nextPose.getRotation().getSin();
@@ -39,7 +39,7 @@ public class TrajectoryPresetSteerAngles extends InstantCommand {
               ChassisVelocities.fromFieldRelativeSpeeds(chassisSpeeds, initialPose.getRotation());
 
           SwerveModuleVelocity[] SwerveModuleVelocitys =
-              DriveConstants.KINEMATICS.toSwerveModuleVelocitys(chassisSpeeds);
+              DriveConstants.KINEMATICS.toSwerveModuleVelocities(chassisSpeeds);
           for (SwerveModuleVelocity SwerveModuleVelocity : SwerveModuleVelocitys) {
             SwerveModuleVelocity.speedMetersPerSecond = 0;
           }

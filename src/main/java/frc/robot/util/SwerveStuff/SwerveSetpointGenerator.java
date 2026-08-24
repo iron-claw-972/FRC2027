@@ -266,10 +266,10 @@ public class SwerveSetpointGenerator {
       double dt) {
     final Translation2d[] modules = moduleLocations;
 
-    SwerveModuleVelocity[] desiredModuleState = kinematics.toSwerveModuleVelocitys(desiredState);
+    SwerveModuleVelocity[] desiredModuleState = kinematics.toSwerveModuleVelocities(desiredState);
     // Make sure desiredState respects velocity limits.
     if (limits.maxDriveVelocity() > 0.0) {
-      SwerveDriveKinematics.desaturateWheelSpeeds(desiredModuleState, limits.maxDriveVelocity());
+      SwerveDriveKinematics.desaturateWheelVelocities(desiredModuleState, dt)(desiredModuleState, limits.maxDriveVelocity());
       desiredState = kinematics.toChassisVelocities(desiredModuleState);
     }
 
@@ -475,7 +475,7 @@ public class SwerveSetpointGenerator {
             prevSetpoint.chassisSpeeds().vx + min_s * dx,
             prevSetpoint.chassisSpeeds().vy + min_s * dy,
             prevSetpoint.chassisSpeeds().omega + min_s * dtheta);
-    var retStates = kinematics.toSwerveModuleVelocitys(retSpeeds);
+    var retStates = kinematics.toSwerveModuleVelocities(retSpeeds);
     for (int i = 0; i < modules.length; ++i) {
       final var maybeOverride = overrideSteering.get(i);
       if (maybeOverride.isPresent()) {

@@ -6,8 +6,8 @@ import org.wpilib.math.numbers.N1;
 import org.wpilib.math.numbers.N2;
 import org.wpilib.math.system.LinearSystem;
 import org.wpilib.math.system.NumericalIntegration;
-import org.wpilib.math.system.plant.DCMotor;
-import org.wpilib.math.system.plant.LinearSystemId;
+import org.wpilib.math.system.DCMotor;
+import org.wpilib.math.system.Models;
 import org.wpilib.simulation.SingleJointedArmSim;
 
 /**
@@ -28,8 +28,7 @@ public class ClimbArmSim extends SingleJointedArmSim {
    * Creates a simulated arm mechanism.
    *
    * @param plant The linear system that represents the arm. This system can be created with {@link
-   *     org.wpilib.math.system.plant.LinearSystemId#createSingleJointedArmSystem(DCMotor,
-   *     double, double)}.
+   *     org.wpilib.math.system.Models#singleJointedArmFromPhysicalConstants(DCMotor, double, double)}.
    * @param gearbox The type of and number of motors in the arm gearbox.
    * @param gearing The gearing of the arm (numbers greater than 1 represent reductions).
    * @param armLengthMeters The length of the arm.
@@ -99,7 +98,7 @@ public class ClimbArmSim extends SingleJointedArmSim {
       double robotMassKilograms,
       double... measurementStdDevs) {
     this(
-        LinearSystemId.createSingleJointedArmSystem(gearbox, jKgMetersSquared, gearing),
+        Models.singleJointedArmFromPhysicalConstants(gearbox, jKgMetersSquared, gearing),
         gearbox,
         gearing,
         armLengthMeters,

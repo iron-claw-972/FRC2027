@@ -33,8 +33,8 @@ import frc.robot.constants.Constants;
 import org.wpilib.units.measure.AngularVelocity;
 import org.wpilib.units.measure.Current;
 import org.wpilib.units.measure.Voltage;
-import org.wpilib.util.Alert;
-import org.wpilib.util.Alert.AlertType;
+import org.wpilib.driverstation.Alert;
+import org.wpilib.driverstation.Alert.AlertType;
 import frc.robot.constants.swerve.DriveConstants;
 import frc.robot.constants.swerve.ModuleConstants;
 import frc.robot.constants.swerve.ModuleType;
@@ -85,7 +85,6 @@ public class Module implements ModuleIO {
   private final Alert turnDisconnectedAlert;
   private final Alert turnEncoderDisconnectedAlert;
 
-  protected final ModuleIOInputsAutoLogged inputs = new ModuleIOInputsAutoLogged();
 
   private ModuleConstants moduleConstants;
   private final MotionMagicVelocityVoltage velocityRequest =

@@ -37,6 +37,7 @@ import frc.robot.constants.GyroBiasConstants;
 import frc.robot.constants.VisionConstants;
 import frc.robot.constants.swerve.DriveConstants;
 import frc.robot.constants.swerve.ModuleConstants;
+import frc.robot.subsystems.drivetrain.GyroIO.GyroIOInputs;
 import frc.robot.util.EqualsUtil;
 import frc.robot.util.PhoenixOdometryThread;
 import frc.robot.util.SwerveModulePose;
@@ -467,7 +468,7 @@ public class Drivetrain extends SubsystemBase {
    */
   public void setModuleStates(SwerveModuleVelocity[] SwerveModuleVelocitys, boolean isOpenLoop) {
     // makes sure speeds of modules don't exceed maximum allowed
-    SwerveDriveKinematics.desaturateWheelSpeeds(SwerveModuleVelocitys, DriveConstants.MAX_SPEED);
+    SwerveDriveKinematics.desaturateWheelVelocities(SwerveModuleVelocitys, DriveConstants.MAX_SPEED);
 
     for (int i = 0; i < 4; i++) {
       modules[i].setDesiredState(SwerveModuleVelocitys[i], isOpenLoop);
