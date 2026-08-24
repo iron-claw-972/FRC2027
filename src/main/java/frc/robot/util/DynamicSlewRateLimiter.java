@@ -77,15 +77,15 @@ public class DynamicSlewRateLimiter {
     prevTime = currentTime;
 
     double change =
-        MathUtil.clamp(
-            input - prevVal, negativeRateLimit * elapsedTime, positiveRateLimit * elapsedTime);
+        Math.max(
+            negativeRateLimit * elapsedTime, Math.min(positiveRateLimit * elapsedTime, input - prevVal));
 
     if (continuous) {
       change =
-          MathUtil.clamp(
-              MathUtil.inputModulus(input - prevVal, lowerContinuousLimit, upperContinuousLimit),
-              negativeRateLimit * elapsedTime,
-              positiveRateLimit * elapsedTime);
+          Math.max(
+              negativeRateLimit * elapsedTime, 
+              Math.min(positiveRateLimit * elapsedTime,
+              MathUtil.inputModulus(input - prevVal, lowerContinuousLimit, upperContinuousLimit)));
 
       prevVal += change;
 

@@ -371,7 +371,7 @@ public class Module implements ModuleIO {
     angleMotor
         .getConfigurator()
         .apply(new MotorOutputConfigs().withInverted(DriveConstants.INVERT_STEER_MOTOR));
-    angleMotor.setNeutralMode(DriveConstants.STEER_NEUTRAL_MODE);
+    angleMotor.configNeutralMode(DriveConstants.STEER_NEUTRAL_MODE);
     angleMotor.setPosition(0);
 
     // optimize bus utilization for angle motor
@@ -475,7 +475,7 @@ public class Module implements ModuleIO {
         .apply(
             new ClosedLoopRampsConfigs()
                 .withDutyCycleClosedLoopRampPeriod(DriveConstants.CLOSE_LOOP_RAMP));
-    driveMotor.setNeutralMode(DriveConstants.DRIVE_NEUTRAL_MODE);
+    driveMotor.configNeutralMode(DriveConstants.DRIVE_NEUTRAL_MODE);
 
     // optimize bus utilization for drive motor
     driveMotor.optimizeBusUtilization();

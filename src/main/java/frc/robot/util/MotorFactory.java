@@ -113,7 +113,7 @@ public class MotorFactory {
     config.Voltage = new VoltageConfigs().withPeakForwardVoltage(Constants.ROBOT_VOLTAGE);
 
     talon.getConfigurator().apply(config);
-    talon.setNeutralMode(NeutralModeValue.Brake);
+    talon.configNeutralMode(NeutralModeValue.Brake);
 
     return talon;
   }
