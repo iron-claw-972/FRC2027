@@ -19,6 +19,7 @@ import com.ctre.phoenix6.signals.StripTypeValue;
 import com.ctre.phoenix6.signals.VBatOutputModeValue;
 
 import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.internal.DriverStationBackend;
 import org.wpilib.driverstation.Alliance;
 import org.wpilib.util.Color;
 import org.wpilib.command2.SubsystemBase;
@@ -63,7 +64,7 @@ public class LED extends SubsystemBase {
   }
 
   public void setColor() {
-    var alliance = DriverStation.getAlliance();
+    var alliance = DriverStationBackend.getAlliance();
     if (alliance.isEmpty()) {
       color = Color.kOrangeRed;
     } else if (alliance.get() == Alliance.RED) {
@@ -92,8 +93,8 @@ public class LED extends SubsystemBase {
     State targetState = State.ON;
     // if (underSecsToFlip(5)) targetState = State.SLOW;
     // if (underSecsToFlip(1)) targetState = State.FAST;
-    if (DriverStation.isAutonomous()) targetState = State.AUTO;
-    if (DriverStation.getMatchTime() < 30) targetState = State.ENDGAME;
+    if (DriverStationBackend.isAutonomous()) targetState = State.AUTO;
+    if (DriverStationBackend.getMatchTime() < 30) targetState = State.ENDGAME;
     if (forceOff) targetState = State.OFF;
 
     if (targetState != lastState) {

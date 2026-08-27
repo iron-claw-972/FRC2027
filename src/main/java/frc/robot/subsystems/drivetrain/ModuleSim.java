@@ -56,7 +56,7 @@ public class ModuleSim extends Module {
 
     // Update odometry inputs
     // Simulate as only getting one value per frame
-    inputs.odometryTimestamps = new double[] {Timer.getFPGATimestamp()};
+    inputs.odometryTimestamps = new double[] {Timer.getTimestamp()};
     inputs.odometryDrivePositionsRad =
         new double[] {inputs.drivePositionRad * DriveConstants.DRIVE_GEAR_RATIO};
     inputs.odometryTurnPositions = new Rotation2d[] {inputs.turnPosition};

@@ -107,7 +107,7 @@ public class GameController extends Controller {
   }
 
   public void setRumble(RumbleStatus rumbleStatus) {
-    controller.setRumble(RumbleType.kLeftRumble, rumbleStatus.rumbleValue);
-    controller.setRumble(RumbleType.kRightRumble, rumbleStatus.rumbleValue);
+    controller.setRumble(RumbleType.LEFT_RUMBLE, rumbleStatus.rumbleValue);
+    controller.setRumble(RumbleType.RIGHT_RUMBLE, rumbleStatus.rumbleValue);
   }
 }

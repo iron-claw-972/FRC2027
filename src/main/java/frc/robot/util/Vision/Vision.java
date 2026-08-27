@@ -29,8 +29,8 @@ import org.wpilib.math.util.Units;
 import org.wpilib.networktables.NetworkTable;
 import org.wpilib.networktables.NetworkTableEntry;
 import org.wpilib.networktables.NetworkTableInstance;
-import org.wpilib.driverstation.DriverStation;
 import org.wpilib.driverstation.DriverStationErrors;
+import org.wpilib.driverstation.internal.DriverStationBackend;
 import org.wpilib.framework.RobotBase;
 import org.wpilib.system.Timer;
 import frc.robot.constants.Constants;
@@ -395,8 +395,8 @@ public class Vision {
       // Continue if this pose doesn't exist
       if (estimatedPose.timestampSeconds < 0
           || !onField(estimatedPose.estimatedPose.toPose2d())
-          || Timer.getFPGATimestamp() < estimatedPose.timestampSeconds
-          || Timer.getFPGATimestamp() > estimatedPose.timestampSeconds + 1) {
+          || Timer.getTimestamp() < estimatedPose.timestampSeconds
+          || Timer.getTimestamp() > estimatedPose.timestampSeconds + 1) {
         continue;
       }
 
@@ -683,7 +683,7 @@ public class Vision {
                   List.of(target),
                   VisionConstants.POSE_STRATEGY));
         } catch (Exception e) {
-          DriverStation.reportError("Error creating EstimatedRobotPose", true);
+          DriverStationBackend.reportError("Error creating EstimatedRobotPose", true);
         }
       }
       return list;

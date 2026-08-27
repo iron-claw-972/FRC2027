@@ -12,9 +12,10 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 // import choreo.auto.AutoFactory;
 // import choreo.auto.AutoRoutine;
 import org.wpilib.math.geometry.Pose3d;
+import org.wpilib.driverstation.Alliance;
 import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.internal.DriverStationBackend;
 import org.wpilib.system.RobotController;
-import org.wpilib.livewindow.LiveWindow;
 import org.wpilib.smartdashboard.SendableChooser;
 import org.wpilib.smartdashboard.SmartDashboard;
 import org.wpilib.command2.Command;
@@ -133,14 +134,9 @@ public class RobotContainer {
     // CommandScheduler.getInstance().schedule(new HardstopWarning(hood, intake, turret)); (no more
     // crt for this)
     // This is really annoying so it's disabled
-    DriverStation.silenceJoystickConnectionWarning(true);
+    DriverStationBackend.silenceJoystickConnectionWarning(true);
 
     CommandScheduler.getInstance().schedule(new LogCommand());
-
-    // TODO: verify this claim.
-    // LiveWindow is causing periodic loop overruns
-    LiveWindow.disableAllTelemetry();
-    LiveWindow.setEnabled(false);
   }
 
   private void initChoreo() {
@@ -248,9 +244,9 @@ public class RobotContainer {
       // This will flip the path being followed to the red side of the field.
       // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
 
-      var alliance = DriverStation.getAlliance();
+      var alliance = DriverStationBackend.getAlliance();
       if (alliance.isPresent()) {
-        return alliance.get() == DriverStation.Alliance.RED;
+        return alliance.get() == Alliance.RED;
       }
       return false;
     };
