@@ -10,7 +10,6 @@ package frc.robot.commands.drive_comm;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
-import org.wpilib.math.util.MathUtil;
 import org.wpilib.math.controller.ProfiledPIDController;
 import org.wpilib.math.filter.Debouncer;
 import org.wpilib.math.geometry.Pose2d;
@@ -178,9 +177,8 @@ public class DriveToPose extends Command {
     final double thetaS = Math.abs(omegaFF.getAsDouble()) * 3.0;
     driveVelocity =
         driveVelocity.interpolate(linearFF.get().times(DriveConstants.MAX_SPEED), linearS);
-    thetaVelocity =
-        MathUtil.interpolate(
-            thetaVelocity, omegaFF.getAsDouble() * DriveConstants.MAX_ANGULAR_SPEED, thetaS);
+    thetaVelocity = 
+        thetaVelocity + (omegaFF.getAsDouble() * DriveConstants.MAX_ANGULAR_SPEED - thetaVelocity) * thetaS;
 
     // Command speeds
     drive.drive(driveVelocity.getX(), driveVelocity.getY(), thetaVelocity, true, false);

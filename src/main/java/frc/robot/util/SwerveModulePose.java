@@ -48,7 +48,7 @@ public class SwerveModulePose {
     double chassisRotation = currentRotation - prevRotation;
 
     for (int i = 0; i < 4; i++) {
-      double position = drive.getModules()[i].getPosition().distanceMeters;
+      double position = drive.getModules()[i].getPosition().distance;
       double distance = position - dist[i];
       dist[i] = position;
 

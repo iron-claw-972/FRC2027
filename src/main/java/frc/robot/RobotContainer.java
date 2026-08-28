@@ -13,7 +13,6 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 // import choreo.auto.AutoRoutine;
 import org.wpilib.math.geometry.Pose3d;
 import org.wpilib.driverstation.Alliance;
-import org.wpilib.driverstation.DriverStation;
 import org.wpilib.driverstation.internal.DriverStationBackend;
 import org.wpilib.system.RobotController;
 import org.wpilib.smartdashboard.SendableChooser;
@@ -23,7 +22,6 @@ import org.wpilib.command2.CommandScheduler;
 import frc.robot.commands.DoNothing;
 import frc.robot.commands.LogCommand;
 // import frc.robot.commands.auto_comm.ChoreoPathCommandBuilder;
-import frc.robot.commands.auto_comm.DynamicAutoBuilder;
 import frc.robot.commands.drive_comm.SysIDDriveCommand;
 import frc.robot.constants.AutoConstants;
 import frc.robot.constants.Constants;
@@ -31,7 +29,6 @@ import frc.robot.constants.VisionConstants;
 import frc.robot.controls.BaseDriverConfig;
 import frc.robot.controls.Operator;
 import frc.robot.controls.PS5ControllerDriverConfig;
-import frc.robot.subsystems.PowerControl.EMABreaker;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.drivetrain.GyroIOPigeon2;
 import frc.robot.util.PathGroupLoader;
@@ -54,14 +51,14 @@ public class RobotContainer {
   private BaseDriverConfig driver = null;
   private Operator operator = null;
 
-  private EMABreaker breaker = null;
+  // private EMABreaker breaker = null;
 
   // auto Command selection
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
-  private final AutoChooser choreoAutoChooser = new AutoChooser();
+  //private final AutoChooser choreoAutoChooser = new AutoChooser();
 
   // choreo auto factory
-  AutoFactory autoFactory;
+  //AutoFactory autoFactory;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -141,7 +138,7 @@ public class RobotContainer {
 
   private void initChoreo() {
     // choreo auto factory init
-    autoFactory =
+    /*autoFactory =
         new AutoFactory(
             drive::getPose,
             drive::resetOdometry,
@@ -155,6 +152,7 @@ public class RobotContainer {
 
     // warmup command for choreo, prevents lag on auto startup
     CommandScheduler.getInstance().schedule(autoFactory.warmupCmd().ignoringDisable(true));
+    */
   }
 
   /** Sets whether the drivetrain uses vision toupdate odometry */
@@ -204,9 +202,10 @@ public class RobotContainer {
     }
   }
 
-  public void addChoreoAuto(String name, AutoRoutine auto) {
+  /*public void addChoreoAuto(String name, AutoRoutine auto) {
     choreoAutoChooser.addCmd(name, auto::cmd);
   }
+    */
 
   /**
    * Initialize the SendableChooser on the SmartDashboard. Fill the SendableChooser with available
@@ -217,13 +216,13 @@ public class RobotContainer {
 
     autoChooser.setDefaultOption("Default", getDefaultAuto());
 
-    DynamicAutoBuilder dynamicAutoBuilder = new DynamicAutoBuilder();
+    // DynamicAutoBuilder dynamicAutoBuilder = new DynamicAutoBuilder();
 
     // names
-    String leftDynamicLiberalDoubleSwipe = "LeftDynamicDoubleLiberalSwipe";
-    String rightDynamicLiberalDoubleSwipe = "RightDynamicDoubleLiberalSwipe";
-    String leftDynamicConservativeDoubleSwipe = "LeftDynamicDoubleConservativeSwipe";
-    String rightDynamicConservativeDoubleSwipe = "RightDynamicDoubleConservativeSwipe";
+    // String leftDynamicLiberalDoubleSwipe = "LeftDynamicDoubleLiberalSwipe";
+    // String rightDynamicLiberalDoubleSwipe = "RightDynamicDoubleLiberalSwipe";
+    // String leftDynamicConservativeDoubleSwipe = "LeftDynamicDoubleConservativeSwipe";
+    // String rightDynamicConservativeDoubleSwipe = "RightDynamicDoubleConservativeSwipe";
     // String leftDynamicShallowDoubleSwipe = "LeftDynamicShallowDoubleSwipe";
     // String rightDynamicShallowDoubleSwipe = "RightDynamicShallowDoubleSwipe";
     // TODO: 2027-ALPHA-FIX - Re-enable Choreo vendordep when JSON is updated
@@ -264,10 +263,10 @@ public class RobotContainer {
     return new DoNothing();
   }
 
-  public Command getAutoCommand() {
-    // return autoChooser.getSelected();
-    return choreoAutoChooser.selectedCommand();
-  }
+  // public Command getAutoCommand() {
+  //   return autoChooser.getSelected();
+  //   return choreoAutoChooser.selectedCommand();
+  // }
 
   public void logComponents() {
     if (!Constants.LOG_MECHANISMS) return;

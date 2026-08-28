@@ -5,7 +5,7 @@ import org.wpilib.math.linalg.VecBuilder;
 import org.wpilib.math.numbers.N1;
 import org.wpilib.math.numbers.N2;
 import org.wpilib.math.system.NumericalIntegration;
-import org.wpilib.math.system..DCMotor;
+import org.wpilib.math.system.DCMotor;
 import org.wpilib.simulation.ElevatorSim;
 
 /** Exactly the same as ElevatorSim, except it can be angled and have a constant force spring */
