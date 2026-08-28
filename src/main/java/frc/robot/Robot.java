@@ -15,7 +15,6 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 // TODO: 2027-ALPHA-FIX - Re-enable grapplerobotics dep when updated
 // import au.grapplerobotics.CanBridge;
 import org.wpilib.net.PortForwarder;
-import org.wpilib.driverstation.DriverStation;
 import org.wpilib.driverstation.internal.DriverStationBackend;
 import org.wpilib.driverstation.Alliance;
 import org.wpilib.system.RobotController;

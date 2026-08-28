@@ -135,8 +135,7 @@ public class GeomUtil {
    * @return The resulting translation
    */
   public static Twist2d toTwist2d(ChassisVelocities speeds) {
-    return new Twist2d(
-        speeds.vx, speeds.vy, speeds.omega);
+    return new Twist2d(speeds.vx, speeds.vy, speeds.omega);
   }
 
   /**

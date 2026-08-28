@@ -103,11 +103,9 @@ public class DriveToPose extends Command {
     Pose2d currentPose = robot.get();
     ChassisVelocities fieldVelocity =
         drive.getChassisVelocities().toFieldRelative(currentPose.getRotation());
-    Translation2d linearFieldVelocity =
-        new Translation2d(fieldVelocity.vx, fieldVelocity.vy);
+    Translation2d linearFieldVelocity = new Translation2d(fieldVelocity.vx, fieldVelocity.vy);
 
-    thetaController.reset(
-        currentPose.getRotation().getRadians(), fieldVelocity.omega);
+    thetaController.reset(currentPose.getRotation().getRadians(), fieldVelocity.omega);
     lastSetpointTranslation = currentPose.getTranslation();
 
     if (targetPose != null) {
@@ -140,7 +138,7 @@ public class DriveToPose extends Command {
     // Calculate drive speed
     double currentDistance = currentPose.getTranslation().getDistance(targetPose.getTranslation());
     double ffScaler =
-        Math.max(0.0, Math.min(1.0,(currentDistance - ffMinRadius) / (ffMaxRadius - ffMinRadius)));
+        Math.max(0.0, Math.min(1.0, (currentDistance - ffMinRadius) / (ffMaxRadius - ffMinRadius)));
     driveErrorAbs = currentDistance;
     driveController.reset(
         lastSetpointTranslation.getDistance(targetPose.getTranslation()),
@@ -177,8 +175,9 @@ public class DriveToPose extends Command {
     final double thetaS = Math.abs(omegaFF.getAsDouble()) * 3.0;
     driveVelocity =
         driveVelocity.interpolate(linearFF.get().times(DriveConstants.MAX_SPEED), linearS);
-    thetaVelocity = 
-        thetaVelocity + (omegaFF.getAsDouble() * DriveConstants.MAX_ANGULAR_SPEED - thetaVelocity) * thetaS;
+    thetaVelocity =
+        thetaVelocity
+            + (omegaFF.getAsDouble() * DriveConstants.MAX_ANGULAR_SPEED - thetaVelocity) * thetaS;
 
     // Command speeds
     drive.drive(driveVelocity.getX(), driveVelocity.getY(), thetaVelocity, true, false);

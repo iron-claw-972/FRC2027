@@ -7,8 +7,10 @@ import frc.robot.subsystems.PowerControl.EMABreaker;
 public class PowerControl extends Command {
   // my beautiful power control subsystems
   private EMABreaker breaker;
+
   @SuppressWarnings("unused")
   private Battery battery;
+
   // TODO: add subsystems back when implementing logic:
   // the real subsystems
   // private Drivetrain drivetrain;

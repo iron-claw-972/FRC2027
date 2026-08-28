@@ -1,6 +1,5 @@
 package frc.robot.commands.auto_comm;
 
-
 public class DynamicAutoBuilder {
 
   public DynamicAutoBuilder() {}

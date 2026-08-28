@@ -10,4 +10,5 @@ package frc.robot.util.SwerveStuff;
 import org.wpilib.math.kinematics.ChassisVelocities;
 import org.wpilib.math.kinematics.SwerveModuleVelocity;
 
-public record SwerveSetpoint(ChassisVelocities chassisSpeeds, SwerveModuleVelocity[] moduleStates) {}
+public record SwerveSetpoint(
+    ChassisVelocities chassisSpeeds, SwerveModuleVelocity[] moduleStates) {}
