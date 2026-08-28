@@ -7,6 +7,7 @@ import frc.robot.subsystems.PowerControl.EMABreaker;
 public class PowerControl extends Command {
   // my beautiful power control subsystems
   private EMABreaker breaker;
+  @SuppressWarnings("unused")
   private Battery battery;
   // TODO: add subsystems back when implementing logic:
   // the real subsystems
@@ -60,7 +61,9 @@ public class PowerControl extends Command {
   @Override
   public void execute() {
     double[] worstFilter = breaker.percentageMaxUsage();
+    @SuppressWarnings("unused")
     double percentage = worstFilter[0]; // percentage of current average until we trip breaker
+    @SuppressWarnings("unused")
     double tau =
         worstFilter[1]; // how quickly this issue is happenning and if we need to respond quickly
 

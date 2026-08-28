@@ -19,7 +19,7 @@ public class EMABreaker extends SubsystemBase {
     double threshold;
   }
 
-  PowerDistribution pDis = new PowerDistribution();
+  PowerDistribution pDis = new PowerDistribution(0);
 
   double[] subsystemCurrents;
 

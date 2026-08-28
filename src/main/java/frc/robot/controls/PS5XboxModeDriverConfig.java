@@ -29,24 +29,36 @@ import lib.controllers.GameController.DPad;
 public class PS5XboxModeDriverConfig extends BaseDriverConfig {
   private final GameController controller = new GameController(Constants.DRIVER_JOY);
   private final BooleanSupplier slowModeSupplier = () -> false;
+  @SuppressWarnings("unused")
   private boolean intakeBoolean = true;
+  @SuppressWarnings("unused")
   private Command autoShoot = null;
+  @SuppressWarnings("unused")
   private Command reverseMotors = null;
 
   // PS5 button aliases
-  // private final Button CROSS = Button.A;
+  @SuppressWarnings("unused")
+  private final Button CROSS = Button.A;
+  @SuppressWarnings("unused")
   private final Button CIRCLE = Button.B;
+  @SuppressWarnings("unused")
   private final Button SQUARE = Button.X;
-  // private final Button TRIANGLE = Button.Y;
-  // private final Button LB = Button.LB;
+  @SuppressWarnings("unused")
+  private final Button TRIANGLE = Button.Y;
+  @SuppressWarnings("unused")
+  private final Button LB = Button.LB;
   private final Button RB = Button.RB;
   private final Button CREATE = Button.BACK;
-  // private final Button OPTIONS = Button.START;
+  @SuppressWarnings("unused")
+  private final Button OPTIONS = Button.START;
+  @SuppressWarnings("unused")
   private final Button LEFT_JOY = Button.LEFT_JOY;
   private final Button RIGHT_JOY = Button.RIGHT_JOY;
 
   // PS5 trigger buttons
+  @SuppressWarnings("unused")
   private final BooleanSupplier LEFT_TRIGGER_BUTTON = controller.LEFT_TRIGGER_BUTTON;
+  @SuppressWarnings("unused")
   private final BooleanSupplier RIGHT_TRIGGER_BUTTON = controller.RIGHT_TRIGGER_BUTTON;
 
   // PS5 axis aliases

@@ -281,9 +281,10 @@ public class Drivetrain extends SubsystemBase {
   public void drive(
       double xSpeed, double ySpeed, double rot, boolean fieldRelative, boolean isOpenLoop) {
     // rot = headingControl(rot, xSpeed, ySpeed);
-    ChassisVelocities speeds = ChassisVelocities.discretize(xSpeed, ySpeed, rot, Constants.LOOP_TIME);
+    ChassisVelocities speeds = new ChassisVelocities(xSpeed, ySpeed, rot).discretize(Constants.LOOP_TIME);
+
     if (fieldRelative) {
-      speeds = ChassisVelocities.fromFieldRelativeSpeeds(speeds, getYaw());
+      speeds = speeds.toRobotRelative(getYaw());
     }
     setChassisVelocities(speeds, isOpenLoop);
   }
@@ -300,7 +301,7 @@ public class Drivetrain extends SubsystemBase {
     double rot = rotationController.calculate(getYaw().getRadians(), heading);
     ChassisVelocities speeds = new ChassisVelocities(xSpeed, ySpeed, rot);
     if (fieldRelative) {
-      speeds = ChassisVelocities.fromFieldRelativeSpeeds(speeds, getYaw());
+      speeds = speeds.toRobotRelative(getYaw());
     }
     setChassisVelocities(speeds, false);
   }

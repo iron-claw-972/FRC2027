@@ -36,7 +36,8 @@ public class TrajectoryPresetSteerAngles extends InstantCommand {
 
           ChassisVelocities chassisSpeeds = new ChassisVelocities(xVelocity, yVelocity, angularVelo);
           chassisSpeeds =
-              ChassisVelocities.fromFieldRelativeSpeeds(chassisSpeeds, initialPose.getRotation());
+              chassisSpeeds.toRobotRelative(initialPose.getRotation());
+
 
           SwerveModuleVelocity[] SwerveModuleVelocitys =
               DriveConstants.KINEMATICS.toSwerveModuleVelocities(chassisSpeeds);

@@ -103,7 +103,7 @@ public class DriveToPose extends Command {
     targetPose = target.get();
     Pose2d currentPose = robot.get();
     ChassisVelocities fieldVelocity =
-        ChassisVelocities.fromRobotRelativeSpeeds(drive.getChassisVelocities(), currentPose.getRotation());
+        drive.getChassisVelocities().toFieldRelative(currentPose.getRotation());
     Translation2d linearFieldVelocity =
         new Translation2d(fieldVelocity.vx, fieldVelocity.vy);
 

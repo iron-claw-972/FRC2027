@@ -33,7 +33,7 @@ public class MotorFactory {
    * @return a fully configured CANSparkMAX
    */
   public static SparkMax createSparkMAX(int id, MotorType motortype, int stallLimit) {
-    SparkMax sparkMAX = new SparkMax(id, motortype);
+    SparkMax sparkMAX = new SparkMax(id, stallLimit, motortype);
 
     sparkMAX.configure(
         new SparkMaxConfig()

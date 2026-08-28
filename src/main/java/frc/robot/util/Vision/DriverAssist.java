@@ -62,11 +62,7 @@ public class DriverAssist {
     Pose2d currentPose = drive.getPose();
     Rotation2d yaw = drive.getYaw();
     ChassisVelocities driveSpeeds = drive.getChassisVelocities();
-    driveSpeeds =
-        ChassisVelocities.fromFieldRelativeSpeeds(
-            driveSpeeds,
-            yaw); // Changing this does not cause problems because getChassisVelocities() creates a new
-    // object
+    driveSpeeds = driveSpeeds.toRobotRelative(yaw);
     State xState = new State(currentPose.getX(), driveSpeeds.vx);
     State yState = new State(currentPose.getY(), driveSpeeds.vy);
     State angleState =
@@ -93,7 +89,7 @@ public class DriverAssist {
             angleProfile.calculate(Constants.LOOP_TIME, angleState, angleGoal).velocity);
     // Robot-relataive goal
     ChassisVelocities goalRobot = goal.times(1);
-    goalRobot = ChassisVelocities.fromRobotRelativeSpeeds(goalRobot, yaw);
+    goalRobot = goalRobot.toFieldRelative(yaw);
 
     // This calculates the actual acceleration we can get
     // This is the only thing that needs to be robot relative
@@ -105,11 +101,11 @@ public class DriverAssist {
             goalRobot,
             Constants.LOOP_TIME);
     ChassisVelocities nextChassisSpeed = nextSetpoint.chassisSpeeds();
-    nextChassisSpeed = ChassisVelocities.fromRobotRelativeSpeeds(nextChassisSpeed, yaw);
+    nextChassisSpeed = nextChassisSpeed.toFieldRelative(yaw);
 
     // Robot relative driver inputs
     ChassisVelocities driverInputRobot = driverInput.times(1); // Copy so original doesn't change
-    driverInputRobot = ChassisVelocities.fromFieldRelativeSpeeds(driverInputRobot, yaw);
+    driverInputRobot = driverInputRobot.toRobotRelative(yaw);
     // This is the speed the driver will be able to get next frame
     // Both speeds need to be obtainable in 1 frame or the driver speed will always be farther away
     SwerveSetpoint driverSetpoint =
@@ -120,7 +116,7 @@ public class DriverAssist {
             driverInputRobot,
             Constants.LOOP_TIME);
     ChassisVelocities driverSpeeds = driverSetpoint.chassisSpeeds();
-    driverSpeeds = ChassisVelocities.fromRobotRelativeSpeeds(driverSpeeds, yaw);
+    driverSpeeds = driverSpeeds.toFieldRelative(yaw);
 
     // The difference between the 2 speeds
     ChassisVelocities error = nextChassisSpeed.minus(driverSpeeds);

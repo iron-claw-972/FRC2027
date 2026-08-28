@@ -54,6 +54,7 @@ public class DefaultDriveCommand extends Command {
     sideTranslation *= allianceReversal;
 
     ChassisVelocities driverInput = new ChassisVelocities(forwardTranslation, sideTranslation, rotation);
+    @SuppressWarnings("unused")
     ChassisVelocities corrected =
         DriverAssist.calculate(swerve, driverInput, swerve.getDesiredPose(), true);
   }

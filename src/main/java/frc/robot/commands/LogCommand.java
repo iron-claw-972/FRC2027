@@ -5,7 +5,7 @@ import frc.robot.constants.Constants;
 
 /// Command for logging stuff
 public class LogCommand extends Command {
-
+  @SuppressWarnings("unused")
   private boolean hubActive = false;
 
   public LogCommand() {}

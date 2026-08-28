@@ -42,6 +42,7 @@ import frc.robot.util.PhoenixOdometryThread;
 import lib.CTREModuleState;
 
 public class Module implements ModuleIO {
+  private final ModuleIOInputs inputs = new ModuleIOInputs();
   private final ModuleType type;
 
   // Degrees
@@ -51,7 +52,6 @@ public class Module implements ModuleIO {
   private final TalonFX driveMotor;
   private final CANcoder CANcoder;
   private SwerveModuleVelocity desiredState;
-
   protected boolean stateDeadband = true;
 
   private boolean optimizeStates = true;

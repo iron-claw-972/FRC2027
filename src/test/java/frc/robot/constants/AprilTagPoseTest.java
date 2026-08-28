@@ -121,7 +121,7 @@ public class AprilTagPoseTest {
       x += pose.getX();
       y += pose.getY();
       z += pose.getZ();
-      rot = rot.plus(pose.getRotation());
+      rot = rot.rotateBy(pose.getRotation());
     }
     x /= poses.size();
     y /= poses.size();
