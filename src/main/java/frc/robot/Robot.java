@@ -63,14 +63,7 @@ public class Robot extends LoggedRobot {
     }
     Logger.start(); // Start logging! No more data receivers, replay sources, or metadata values may
     // be added.
-  }
 
-  /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
-   */
-  @Override
-  public void robotInit() {
     // To Set the Robot Identity
     //   SimGUI: Persistent Values, Preferences, RobotId, then restart Simulation
     //     changes networktables.json, networktables.json.bck (both Untracked)
@@ -146,7 +139,8 @@ public class Robot extends LoggedRobot {
     // Network Tables.
     // There was a problem last year because the operation also installed about over a dozen items
     // (taking more than 20 ms).
-    autoCommand = robotContainer.getAutoCommand();
+    // TODO: add back when Choreo becomes available
+    //autoCommand = robotContainer.getAutoCommand();
 
     // If there is an autonomous command, then schedule it
     if (autoCommand != null) {
@@ -178,14 +172,14 @@ public class Robot extends LoggedRobot {
 
   /** This function is called once each time the robot enters Test mode. */
   @Override
-  public void testInit() {
+  public void utilityInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
   }
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void utilityPeriodic() {}
 
   @Override
   public void simulationPeriodic() {}

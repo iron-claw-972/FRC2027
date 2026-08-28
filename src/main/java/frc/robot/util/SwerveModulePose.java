@@ -58,7 +58,7 @@ public class SwerveModulePose {
               0,
               MathUtil.angleModulus(states[i].angle.getRadians() - angles[i] + chassisRotation));
       angles[i] = states[i].angle.getRadians();
-      modulePositions[i] = modulePositions[i].exp(twist);
+      modulePositions[i] = modulePositions[i].plus(twist.exp());
 
       displayPoses[i] =
           new Pose2d(
