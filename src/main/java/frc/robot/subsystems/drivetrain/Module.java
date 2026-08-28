@@ -42,8 +42,8 @@ import frc.robot.util.PhoenixOdometryThread;
 import lib.CTREModuleState;
 
 public class Module implements ModuleIO {
-protected final ModuleIOInputsAutoLogged inputs = new ModuleIOInputsAutoLogged();  
-private final ModuleType type;
+  protected final ModuleIOInputsAutoLogged inputs = new ModuleIOInputsAutoLogged();
+  private final ModuleType type;
 
   // Degrees
   private final double angleOffset;
