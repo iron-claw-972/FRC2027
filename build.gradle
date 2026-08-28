@@ -58,6 +58,12 @@ def includeDesktopSupport = true
 // Also defines JUnit 5.
 dependencies {
     annotationProcessor wpi.java.deps.wpilibAnnotations()
+
+    def akitJson = new groovy.json.JsonSlurper().parseText(
+        new File(projectDir.getAbsolutePath() + "/vendordeps/AdvantageKit.json").text
+    )
+    annotationProcessor "org.littletonrobotics.akit:akit-autolog:$akitJson.version"
+
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
     implementation "com.fasterxml.jackson.core:jackson-databind:2.17.2"

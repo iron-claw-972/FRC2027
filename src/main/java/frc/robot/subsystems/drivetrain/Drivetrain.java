@@ -7,7 +7,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 
-import org.littletonrobotics.junction.AutoLog;
 import org.littletonrobotics.junction.AutoLogOutput;
 import org.littletonrobotics.junction.Logger;
 
@@ -38,7 +37,6 @@ import frc.robot.constants.GyroBiasConstants;
 import frc.robot.constants.VisionConstants;
 import frc.robot.constants.swerve.DriveConstants;
 import frc.robot.constants.swerve.ModuleConstants;
-import frc.robot.subsystems.drivetrain.GyroIO.GyroIOInputs;
 import frc.robot.util.EqualsUtil;
 import frc.robot.util.PhoenixOdometryThread;
 import frc.robot.util.SwerveModulePose;
