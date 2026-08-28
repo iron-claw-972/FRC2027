@@ -53,7 +53,8 @@ public class DefaultDriveCommand extends Command {
     forwardTranslation *= allianceReversal;
     sideTranslation *= allianceReversal;
 
-    ChassisVelocities driverInput = new ChassisVelocities(forwardTranslation, sideTranslation, rotation);
+    ChassisVelocities driverInput =
+        new ChassisVelocities(forwardTranslation, sideTranslation, rotation);
     @SuppressWarnings("unused")
     ChassisVelocities corrected =
         DriverAssist.calculate(swerve, driverInput, swerve.getDesiredPose(), true);
@@ -68,15 +69,9 @@ public class DefaultDriveCommand extends Command {
     // If the driver is pressing the align button or a command set the drivetrain to
     // align, then align to speaker
     if (driver.getIsAlign() || swerve.getIsAlign()) {
-      swerve.driveHeading(
-          speeds.vx, speeds.vy, swerve.getAlignAngle(), true);
+      swerve.driveHeading(speeds.vx, speeds.vy, swerve.getAlignAngle(), true);
     } else {
-      swerve.drive(
-          speeds.vx,
-          speeds.vy,
-          speeds.omega,
-          true,
-          false);
+      swerve.drive(speeds.vx, speeds.vy, speeds.omega, true, false);
     }
   }
 }

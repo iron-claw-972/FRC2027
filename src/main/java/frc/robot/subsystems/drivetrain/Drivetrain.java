@@ -280,7 +280,8 @@ public class Drivetrain extends SubsystemBase {
   public void drive(
       double xSpeed, double ySpeed, double rot, boolean fieldRelative, boolean isOpenLoop) {
     // rot = headingControl(rot, xSpeed, ySpeed);
-    ChassisVelocities speeds = new ChassisVelocities(xSpeed, ySpeed, rot).discretize(Constants.LOOP_TIME);
+    ChassisVelocities speeds =
+        new ChassisVelocities(xSpeed, ySpeed, rot).discretize(Constants.LOOP_TIME);
 
     if (fieldRelative) {
       speeds = speeds.toRobotRelative(getYaw());
@@ -468,7 +469,8 @@ public class Drivetrain extends SubsystemBase {
    */
   public void setModuleStates(SwerveModuleVelocity[] SwerveModuleVelocitys, boolean isOpenLoop) {
     // makes sure speeds of modules don't exceed maximum allowed
-    SwerveDriveKinematics.desaturateWheelVelocities(SwerveModuleVelocitys, DriveConstants.MAX_SPEED);
+    SwerveDriveKinematics.desaturateWheelVelocities(
+        SwerveModuleVelocitys, DriveConstants.MAX_SPEED);
 
     for (int i = 0; i < 4; i++) {
       modules[i].setDesiredState(SwerveModuleVelocitys[i], isOpenLoop);

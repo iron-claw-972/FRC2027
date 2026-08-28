@@ -65,8 +65,7 @@ public class DriverAssist {
     driveSpeeds = driveSpeeds.toRobotRelative(yaw);
     State xState = new State(currentPose.getX(), driveSpeeds.vx);
     State yState = new State(currentPose.getY(), driveSpeeds.vy);
-    State angleState =
-        new State(currentPose.getRotation().getRadians(), driveSpeeds.omega);
+    State angleState = new State(currentPose.getRotation().getRadians(), driveSpeeds.omega);
 
     // Store goal states
     State xGoal = new State(desiredPose.getX(), 0);
@@ -128,8 +127,7 @@ public class DriverAssist {
                 1.2, -currentPose.getTranslation().getDistance(desiredPose.getTranslation()));
 
     // Driver input speed
-    double driverInputSpeed =
-        Math.hypot(driverInput.vx, driverInput.vy);
+    double driverInputSpeed = Math.hypot(driverInput.vx, driverInput.vy);
 
     // The amount to correct by
     ChassisVelocities correction =

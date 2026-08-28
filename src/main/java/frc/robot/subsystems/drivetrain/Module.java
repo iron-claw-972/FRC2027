@@ -85,7 +85,6 @@ private final ModuleType type;
   private final Alert turnDisconnectedAlert;
   private final Alert turnEncoderDisconnectedAlert;
 
-
   private ModuleConstants moduleConstants;
   private final MotionMagicVelocityVoltage velocityRequest =
       new MotionMagicVelocityVoltage(0.0).withUpdateFreqHz(0);
@@ -293,8 +292,7 @@ private final ModuleType type;
   private void setAngle() {
     if (!DriveConstants.DISABLE_DEADBAND_AND_OPTIMIZATION) {
       // Prevent rotating module if desired speed < 1%. Prevents jittering and unnecessary movement.
-      if (stateDeadband
-          && (Math.abs(desiredState.velocity) <= (DriveConstants.MAX_SPEED * 0.01))) {
+      if (stateDeadband && (Math.abs(desiredState.velocity) <= (DriveConstants.MAX_SPEED * 0.01))) {
         stop();
         return;
       }

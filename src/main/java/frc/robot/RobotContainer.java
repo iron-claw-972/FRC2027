@@ -55,10 +55,11 @@ public class RobotContainer {
 
   // auto Command selection
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
-  //private final AutoChooser choreoAutoChooser = new AutoChooser();
+
+  // private final AutoChooser choreoAutoChooser = new AutoChooser();
 
   // choreo auto factory
-  //AutoFactory autoFactory;
+  // AutoFactory autoFactory;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -233,7 +234,7 @@ public class RobotContainer {
 
     // put the Chooser on the SmartDashboard
     SmartDashboard.putData("Auto chooser", autoChooser);
-   // SmartDashboard.putData("Choreo auto chooser", choreoAutoChooser);
+    // SmartDashboard.putData("Choreo auto chooser", choreoAutoChooser);
   }
 
   public static BooleanSupplier getAllianceColorBooleanSupplier() {

@@ -11,9 +11,9 @@ import org.wpilib.util.WPIUtilJNI;
  * A class that limits the rate of change of an input value. Useful for implementing voltage,
  * setpoint, and/or output ramps. A slew-rate limit is most appropriate when the quantity being
  * controlled is a velocity or a voltage; when controlling a position, consider using a {@link
- * org.wpilib.math.trajectory.TrapezoidProfile} instead. Edited by 972 to be "dynamic", that is,
- * the slew rate can be modified on the fly. Additionally, it can be set to be continuous on a
- * range, useful for angles.
+ * org.wpilib.math.trajectory.TrapezoidProfile} instead. Edited by 972 to be "dynamic", that is, the
+ * slew rate can be modified on the fly. Additionally, it can be set to be continuous on a range,
+ * useful for angles.
  */
 public class DynamicSlewRateLimiter {
   private double positiveRateLimit;
@@ -78,14 +78,17 @@ public class DynamicSlewRateLimiter {
 
     double change =
         Math.max(
-            negativeRateLimit * elapsedTime, Math.min(positiveRateLimit * elapsedTime, input - prevVal));
+            negativeRateLimit * elapsedTime,
+            Math.min(positiveRateLimit * elapsedTime, input - prevVal));
 
     if (continuous) {
       change =
           Math.max(
-              negativeRateLimit * elapsedTime, 
-              Math.min(positiveRateLimit * elapsedTime,
-              MathUtil.inputModulus(input - prevVal, lowerContinuousLimit, upperContinuousLimit)));
+              negativeRateLimit * elapsedTime,
+              Math.min(
+                  positiveRateLimit * elapsedTime,
+                  MathUtil.inputModulus(
+                      input - prevVal, lowerContinuousLimit, upperContinuousLimit)));
 
       prevVal += change;
 

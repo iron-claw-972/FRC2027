@@ -47,7 +47,8 @@ public class PathGroupLoader {
       }
     } else {
       System.out.println("Error processing file");
-      DriverStationErrors.reportWarning("Issue with finding path files. Paths will not be loaded.", true);
+      DriverStationErrors.reportWarning(
+          "Issue with finding path files. Paths will not be loaded.", true);
     }
     System.out.println("File processing took a total of " + totalTime + " milliseconds");
   }

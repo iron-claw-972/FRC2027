@@ -16,7 +16,8 @@
 //     Command command = factory.trajectoryCmd(pathName);
 
 //     return Commands.sequence(
-//         resetOdemetry ? new InstantCommand(() -> factory.resetOdometry(pathName)) : new DoNothing(),
+//         resetOdemetry ? new InstantCommand(() -> factory.resetOdometry(pathName)) : new
+// DoNothing(),
 //         command);
 //   }
 // }

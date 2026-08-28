@@ -50,10 +50,6 @@ public class AimAtGamePiece extends DefaultDriveCommand {
     }
 
     // System.out.println("objangle " + object.getAngle());
-    swerve.driveHeading(
-        speeds.vx,
-        speeds.vy,
-        MathUtil.angleModulus(object.getAngle()),
-        true);
+    swerve.driveHeading(speeds.vx, speeds.vy, MathUtil.angleModulus(object.getAngle()), true);
   }
 }

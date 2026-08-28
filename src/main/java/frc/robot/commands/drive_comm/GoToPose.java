@@ -83,10 +83,12 @@ public class GoToPose extends SequentialCommandGroup {
     // makes weird paths.
     if (dist > 3) {
       command = new DoNothing();
-      DriverStationErrors.reportWarning("Alignment Path too long, doing nothing, GoToPose.java", false);
+      DriverStationErrors.reportWarning(
+          "Alignment Path too long, doing nothing, GoToPose.java", false);
     } else if (dist < 0.02) {
       command = new DoNothing();
-      DriverStationErrors.reportWarning("Alignment Path too short, doing nothing, GoToPose.java", false);
+      DriverStationErrors.reportWarning(
+          "Alignment Path too short, doing nothing, GoToPose.java", false);
     }
 
     return command;
