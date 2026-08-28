@@ -280,7 +280,7 @@ public class SwerveSetpointGenerator {
       need_to_steer = false;
       for (int i = 0; i < modules.length; ++i) {
         desiredModuleState[i].angle = prevSetpoint.moduleStates()[i].angle;
-        desiredModuleState[i].speedMetersPerSecond = 0.0;
+        desiredModuleState[i].velocity = 0.0;
       }
     }
 
@@ -295,20 +295,20 @@ public class SwerveSetpointGenerator {
     for (int i = 0; i < modules.length; ++i) {
       prev_vx[i] =
           prevSetpoint.moduleStates()[i].angle.getCos()
-              * prevSetpoint.moduleStates()[i].speedMetersPerSecond;
+              * prevSetpoint.moduleStates()[i].velocity;
       prev_vy[i] =
           prevSetpoint.moduleStates()[i].angle.getSin()
-              * prevSetpoint.moduleStates()[i].speedMetersPerSecond;
+              * prevSetpoint.moduleStates()[i].velocity;
       prev_heading[i] = prevSetpoint.moduleStates()[i].angle;
-      if (prevSetpoint.moduleStates()[i].speedMetersPerSecond < 0.0) {
+      if (prevSetpoint.moduleStates()[i].velocity < 0.0) {
         prev_heading[i] = prev_heading[i].rotateBy(Rotation2d.fromRadians(Math.PI));
       }
       desired_vx[i] =
-          desiredModuleState[i].angle.getCos() * desiredModuleState[i].speedMetersPerSecond;
+          desiredModuleState[i].angle.getCos() * desiredModuleState[i].velocity;
       desired_vy[i] =
-          desiredModuleState[i].angle.getSin() * desiredModuleState[i].speedMetersPerSecond;
+          desiredModuleState[i].angle.getSin() * desiredModuleState[i].velocity;
       desired_heading[i] = desiredModuleState[i].angle;
-      if (desiredModuleState[i].speedMetersPerSecond < 0.0) {
+      if (desiredModuleState[i].velocity < 0.0) {
         desired_heading[i] = desired_heading[i].rotateBy(Rotation2d.fromRadians(Math.PI));
       }
       if (all_modules_should_flip) {
@@ -359,11 +359,11 @@ public class SwerveSetpointGenerator {
         continue;
       }
       overrideSteering.add(Optional.empty());
-      if (epsilonEquals(prevSetpoint.moduleStates()[i].speedMetersPerSecond, 0.0)) {
+      if (epsilonEquals(prevSetpoint.moduleStates()[i].velocity, 0.0)) {
         // If module is stopped, we know that we will need to move straight to the final steering
         // angle, so limit based
         // purely on rotation in place.
-        if (epsilonEquals(desiredModuleState[i].speedMetersPerSecond, 0.0)) {
+        if (epsilonEquals(desiredModuleState[i].velocity, 0.0)) {
           // Goal angle doesn't matter. Just leave module at its current angle.
           overrideSteering.set(i, Optional.of(prevSetpoint.moduleStates()[i].angle));
           continue;
@@ -481,7 +481,7 @@ public class SwerveSetpointGenerator {
       if (maybeOverride.isPresent()) {
         var override = maybeOverride.get();
         if (flipHeading(retStates[i].angle.unaryMinus().rotateBy(override))) {
-          retStates[i].speedMetersPerSecond *= -1.0;
+          retStates[i].velocity *= -1.0;
         }
         retStates[i].angle = override;
       }
@@ -489,7 +489,7 @@ public class SwerveSetpointGenerator {
           prevSetpoint.moduleStates()[i].angle.unaryMinus().rotateBy(retStates[i].angle);
       if (flipHeading(deltaRotation)) {
         retStates[i].angle = retStates[i].angle.rotateBy(Rotation2d.fromRadians(Math.PI));
-        retStates[i].speedMetersPerSecond *= -1.0;
+        retStates[i].velocity *= -1.0;
       }
     }
     return new SwerveSetpoint(retSpeeds, retStates);

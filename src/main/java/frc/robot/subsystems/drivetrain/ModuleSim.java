@@ -74,7 +74,7 @@ public class ModuleSim extends Module {
   public void setDesiredState(SwerveModuleVelocity desiredState, boolean isOpenLoop) {
     if (!DriveConstants.DISABLE_DEADBAND_AND_OPTIMIZATION) {
       // If the module isn't moving, don't rotate it
-      if (Math.abs(desiredState.speedMetersPerSecond) < 0.001) {
+      if (Math.abs(desiredState.velocity) < 0.001) {
         currentSpeed = 0;
         return;
       }
@@ -83,7 +83,7 @@ public class ModuleSim extends Module {
           CTREModuleState.optimize(desiredState, new Rotation2d(currentSteerPositionRad));
     }
 
-    currentSpeed = desiredState.speedMetersPerSecond;
+    currentSpeed = desiredState.velocity;
     currentSteerPositionRad = desiredState.angle.getRadians();
   }
 
@@ -96,7 +96,7 @@ public class ModuleSim extends Module {
   }
 
   public double getDesiredVelocity() {
-    return getDesiredState().speedMetersPerSecond;
+    return getDesiredState().velocity;
   }
 
   public Rotation2d getDesiredAngle() {

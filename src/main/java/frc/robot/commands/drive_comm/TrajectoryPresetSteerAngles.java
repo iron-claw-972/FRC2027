@@ -41,7 +41,7 @@ public class TrajectoryPresetSteerAngles extends InstantCommand {
           SwerveModuleVelocity[] SwerveModuleVelocitys =
               DriveConstants.KINEMATICS.toSwerveModuleVelocities(chassisSpeeds);
           for (SwerveModuleVelocity SwerveModuleVelocity : SwerveModuleVelocitys) {
-            SwerveModuleVelocity.speedMetersPerSecond = 0;
+            SwerveModuleVelocity.velocity = 0;
           }
           drive.setModuleStates(SwerveModuleVelocitys, true);
           drive.setStateDeadband(true);

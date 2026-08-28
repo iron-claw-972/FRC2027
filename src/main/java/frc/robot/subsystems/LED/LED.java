@@ -18,7 +18,6 @@ import com.ctre.phoenix6.signals.StatusLedWhenActiveValue;
 import com.ctre.phoenix6.signals.StripTypeValue;
 import com.ctre.phoenix6.signals.VBatOutputModeValue;
 
-import org.wpilib.driverstation.DriverStation;
 import org.wpilib.driverstation.internal.DriverStationBackend;
 import org.wpilib.driverstation.Alliance;
 import org.wpilib.util.Color;
@@ -66,13 +65,13 @@ public class LED extends SubsystemBase {
   public void setColor() {
     var alliance = DriverStationBackend.getAlliance();
     if (alliance.isEmpty()) {
-      color = Color.kOrangeRed;
+      color = Color.ORANGE_RED;
     } else if (alliance.get() == Alliance.RED) {
-      color = Color.kRed;
+      color = Color.RED;
     } else if (alliance.get() == Alliance.BLUE) {
-      color = Color.kBlue;
+      color = Color.BLUE;
     } else {
-      color = Color.kOrangeRed;
+      color = Color.ORANGE_RED;
     }
   }
 
@@ -140,13 +139,13 @@ public class LED extends SubsystemBase {
   public void setTwinkle() {
     candle.clearAllAnimations();
     candle.setControl(
-        new TwinkleAnimation(8, 8 + stripLength).withColor(new RGBWColor(Color.kViolet)));
+        new TwinkleAnimation(8, 8 + stripLength).withColor(new RGBWColor(Color.VIOLET)));
   }
 
   public void setColorFlow() {
     candle.clearAllAnimations();
     candle.setControl(
-        new ColorFlowAnimation(8, 8 + stripLength).withColor(new RGBWColor(Color.kAzure)));
+        new ColorFlowAnimation(8, 8 + stripLength).withColor(new RGBWColor(Color.AZURE)));
   }
 
   public void setStrobe() {

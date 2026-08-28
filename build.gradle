@@ -61,6 +61,7 @@ dependencies {
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
     implementation "com.fasterxml.jackson.core:jackson-databind:2.17.2"
+    implementation "gov.nist.math:jama:1.0.3"
 
     systemcoreDebug wpi.java.deps.wpilibJniDebug(wpi.platforms.systemcore)
     systemcoreDebug wpi.java.vendor.jniDebug(wpi.platforms.systemcore)

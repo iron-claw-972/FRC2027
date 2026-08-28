@@ -63,9 +63,9 @@ public class SwerveModulePose {
       displayPoses[i] =
           new Pose2d(
               modulePositions[i].getTranslation(),
-              EqualsUtil.epsilonEquals(states[i].speedMetersPerSecond, 0, 0.01)
+              EqualsUtil.epsilonEquals(states[i].velocity, 0, 0.01)
                   ? displayPoses[i].getRotation()
-                  : states[i].speedMetersPerSecond < 0
+                  : states[i].velocity < 0
                       ? modulePositions[i].getRotation().plus(new Rotation2d(Math.PI))
                       : modulePositions[i].getRotation());
     }

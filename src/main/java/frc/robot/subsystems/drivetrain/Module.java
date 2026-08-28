@@ -34,7 +34,7 @@ import org.wpilib.units.measure.AngularVelocity;
 import org.wpilib.units.measure.Current;
 import org.wpilib.units.measure.Voltage;
 import org.wpilib.driverstation.Alert;
-import org.wpilib.driverstation.Alert.AlertType;
+import org.wpilib.driverstation.Alert.Level;
 import frc.robot.constants.swerve.DriveConstants;
 import frc.robot.constants.swerve.ModuleConstants;
 import frc.robot.constants.swerve.ModuleType;
@@ -131,19 +131,19 @@ public class Module implements ModuleIO {
             "Disconnected drive motor on module "
                 + Integer.toString(moduleConstants.ordinal())
                 + ".",
-            AlertType.kError);
+            Level.HIGH);
     turnDisconnectedAlert =
         new Alert(
             "Disconnected turn motor on module "
                 + Integer.toString(moduleConstants.ordinal())
                 + ".",
-            AlertType.kError);
+            Level.HIGH);
     turnEncoderDisconnectedAlert =
         new Alert(
             "Disconnected turn encoder on module "
                 + Integer.toString(moduleConstants.ordinal())
                 + ".",
-            AlertType.kError);
+            Level.HIGH);
 
     // Configure periodic frames
     BaseStatusSignal.setUpdateFrequencyForAll(250, drivePosition, turnPosition);
@@ -272,11 +272,11 @@ public class Module implements ModuleIO {
       return;
     }
     if (isOpenLoop) {
-      double percentOutput = desiredState.speedMetersPerSecond / DriveConstants.MAX_SPEED;
+      double percentOutput = desiredState.velocity / DriveConstants.MAX_SPEED;
       driveMotor.setControl(new DutyCycleOut(percentOutput));
     } else {
       double velocity =
-          desiredState.speedMetersPerSecond
+          desiredState.velocity
               / DriveConstants.WHEEL_RADIUS
               / 2
               / Math.PI
@@ -294,7 +294,7 @@ public class Module implements ModuleIO {
     if (!DriveConstants.DISABLE_DEADBAND_AND_OPTIMIZATION) {
       // Prevent rotating module if desired speed < 1%. Prevents jittering and unnecessary movement.
       if (stateDeadband
-          && (Math.abs(desiredState.speedMetersPerSecond) <= (DriveConstants.MAX_SPEED * 0.01))) {
+          && (Math.abs(desiredState.velocity) <= (DriveConstants.MAX_SPEED * 0.01))) {
         stop();
         return;
       }
@@ -495,7 +495,7 @@ public class Module implements ModuleIO {
   }
 
   public double getDriveVelocityError() {
-    return getDesiredState().speedMetersPerSecond - getState().speedMetersPerSecond;
+    return getDesiredState().velocity - getState().velocity;
   }
 
   public void stop() {
@@ -512,7 +512,7 @@ public class Module implements ModuleIO {
   }
 
   public double getDesiredVelocity() {
-    return getDesiredState().speedMetersPerSecond;
+    return getDesiredState().velocity;
   }
 
   public Rotation2d getDesiredAngle() {
