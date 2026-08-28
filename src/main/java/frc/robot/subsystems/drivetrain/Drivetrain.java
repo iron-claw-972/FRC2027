@@ -470,8 +470,8 @@ public class Drivetrain extends SubsystemBase {
   public void setModuleStates(SwerveModuleVelocity[] SwerveModuleVelocitys, boolean isOpenLoop) {
     // makes sure speeds of modules don't exceed maximum allowed
     SwerveModuleVelocitys =
-      SwerveDriveKinematics.desaturateWheelVelocities(
-        SwerveModuleVelocitys, DriveConstants.MAX_SPEED);
+        SwerveDriveKinematics.desaturateWheelVelocities(
+            SwerveModuleVelocitys, DriveConstants.MAX_SPEED);
 
     for (int i = 0; i < 4; i++) {
       modules[i].setDesiredState(SwerveModuleVelocitys[i], isOpenLoop);

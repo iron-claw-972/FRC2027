@@ -140,7 +140,7 @@ public class Robot extends LoggedRobot {
     // There was a problem last year because the operation also installed about over a dozen items
     // (taking more than 20 ms).
     // TODO: add back when Choreo becomes available
-    //autoCommand = robotContainer.getAutoCommand();
+    // autoCommand = robotContainer.getAutoCommand();
 
     // If there is an autonomous command, then schedule it
     if (autoCommand != null) {
