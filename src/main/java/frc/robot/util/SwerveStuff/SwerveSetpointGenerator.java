@@ -96,7 +96,7 @@ public class SwerveSetpointGenerator {
     if (iterations_left < 0 || epsilonEquals(f_0, f_1)) {
       return 1.0;
     }
-    var s_guess = Math.max(0.0, Math.min(1.0, -f_0 / (f_1 - f_0)));
+    var s_guess = Math.clamp(-f_0 / (f_1 - f_0), 0.0, 1.0);
     var x_guess = (x_1 - x_0) * s_guess + x_0;
     var y_guess = (y_1 - y_0) * s_guess + y_0;
     var f_guess = func.f(x_guess, y_guess);
@@ -176,7 +176,7 @@ public class SwerveSetpointGenerator {
     if (dist <= max_vel_step) {
       return 1;
     }
-    return Math.max(0.0, Math.min(1.0, max_vel_step / dist));
+    return Math.clamp(max_vel_step / dist, 0.0, 1.0);
   }
 
   protected double findDriveMaxS(
