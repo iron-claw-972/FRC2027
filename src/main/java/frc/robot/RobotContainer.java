@@ -31,6 +31,7 @@ import frc.robot.controls.Operator;
 import frc.robot.controls.PS5ControllerDriverConfig;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.drivetrain.GyroIOPigeon2;
+import frc.robot.subsystems.testbed.MotorTest;
 import frc.robot.util.PathGroupLoader;
 import frc.robot.util.Vision.DetectedObject;
 import frc.robot.util.Vision.Vision;
@@ -45,6 +46,7 @@ public class RobotContainer {
   // The robot's subsystems are defined here...
   private Drivetrain drive = null;
   private Vision vision = null;
+  private MotorTest motorTest = null;
   // private LED led = null;
 
   // Controllers are defined here
@@ -79,6 +81,7 @@ public class RobotContainer {
     // dispatch on the robot
     switch (robotId) {
       case TestBed1:
+        motorTest = new MotorTest();
         break;
 
       case TestBed2:
