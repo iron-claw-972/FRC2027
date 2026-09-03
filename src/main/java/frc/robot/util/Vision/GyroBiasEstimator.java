@@ -58,8 +58,7 @@ public class GyroBiasEstimator {
     }
 
     // clamp weight
-    double weight = Math.max(0.0, Math.min(1.0, visionWeight));
-
+    double weight = Math.clamp(visionWeight, 0.0, 1.0);
     // accumulate weighted bias
     weightedBiasSum += diff * weight;
     totalWeight += weight;
