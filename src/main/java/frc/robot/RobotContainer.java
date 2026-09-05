@@ -29,6 +29,7 @@ import frc.robot.constants.VisionConstants;
 import frc.robot.controls.BaseDriverConfig;
 import frc.robot.controls.Operator;
 import frc.robot.controls.PS5ControllerDriverConfig;
+import frc.robot.subsystems.Motor;
 import frc.robot.subsystems.drivetrain.Drivetrain;
 import frc.robot.subsystems.drivetrain.GyroIOPigeon2;
 import frc.robot.subsystems.testbed.MotorTest;
@@ -62,6 +63,7 @@ public class RobotContainer {
 
   // choreo auto factory
   // AutoFactory autoFactory;
+  Motor motor;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -130,6 +132,9 @@ public class RobotContainer {
           SmartDashboard.putData("SysId Characterization", new SysIDDriveCommand(drive));
         }
         break;
+      case Default:
+        motor = new Motor();
+
     }
 
     // CommandScheduler.getInstance().schedule(new HardstopWarning(hood, intake, turret)); (no more

@@ -70,7 +70,7 @@ public class Robot extends LoggedRobot {
     //   Uncomment the next line, set the desired RobotId, deploy, and then comment the line out
     //  RobotId.setRobotId(RobotId.SwerveCompetition);
 
-    RobotController.setBrownoutVoltage(4.6); // TODO might break on systemcores
+    // RobotController.setBrownoutVoltage(4.6); // TODO might break on systemcores
     // https://www.chiefdelphi.com/t/frc-1678-citrus-circuits-systemcore-alpha-testing-thread/506842
     // obtain this robot's identity
     RobotId robotId = RobotId.getRobotId();
