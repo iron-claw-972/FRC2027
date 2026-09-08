@@ -131,7 +131,6 @@ public class RobotContainer {
         break;
       case Default:
         motor = new Motor();
-
     }
 
     // CommandScheduler.getInstance().schedule(new HardstopWarning(hood, intake, turret)); (no more
