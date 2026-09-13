@@ -83,7 +83,7 @@ public class RobotContainer {
     // dispatch on the robot
     switch (robotId) {
       case TestBed1:
-        motorTest = new MotorTest();
+        motor = new Motor();
         break;
 
       case TestBed2:

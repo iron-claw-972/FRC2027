@@ -8,7 +8,7 @@ import frc.robot.constants.Constants;
 import frc.robot.constants.IdConstants;
 
 public class Motor extends SubsystemBase {
-    TalonFX motor = new TalonFX(56, Constants.CANIVORE_SUB);
+    TalonFX motor = new TalonFX(56, Constants.CANIVORE_CAN);
     public Motor() {
         System.out.println("wassup");
 
