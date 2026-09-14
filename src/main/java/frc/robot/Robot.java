@@ -17,7 +17,6 @@ import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 import org.wpilib.net.PortForwarder;
 import org.wpilib.driverstation.internal.DriverStationBackend;
 import org.wpilib.driverstation.Alliance;
-import org.wpilib.system.RobotController;
 import org.wpilib.command2.Command;
 import org.wpilib.command2.CommandScheduler;
 import frc.robot.constants.Constants;
