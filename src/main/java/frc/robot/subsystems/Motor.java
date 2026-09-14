@@ -7,11 +7,11 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.constants.Constants;
 
 public class Motor extends SubsystemBase {
-  TalonFX motor = new TalonFX(56, Constants.CANIVORE_SUB);
 
-  public Motor() {
-    System.out.println("wassup");
-  }
+    TalonFX motor = new TalonFX(56, Constants.CANIVORE_CAN);
+    public Motor() {
+        System.out.println("wassup");
+    }
 
   @Override
   public void periodic() {
