@@ -39,7 +39,4 @@ public class IdConstants {
   public static final int RIGHT_MOTOR_ID = 1;
   public static final int LEFT_MOTOR_ID = 2;
   public static final int ROLLER_MOTOR_ID = 3;
-
-  // test motor
-  public static final int MOTOR_TEST_ID = 14;
 }
