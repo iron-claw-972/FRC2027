@@ -67,7 +67,7 @@ public class Robot extends LoggedRobot {
     //   SimGUI: Persistent Values, Preferences, RobotId, then restart Simulation
     //     changes networktables.json, networktables.json.bck (both Untracked)
     //   Uncomment the next line, set the desired RobotId, deploy, and then comment the line out
-    //RobotId.setRobotId(RobotId.TestBed1);
+    RobotId.setRobotId(RobotId.TwinBot);
 
     // RobotController.setBrownoutVoltage(4.6); // TODO might break on systemcores
     // https://www.chiefdelphi.com/t/frc-1678-citrus-circuits-systemcore-alpha-testing-thread/506842
